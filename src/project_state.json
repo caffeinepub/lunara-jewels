@@ -1,0 +1,271 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 15,
+  "summary": "Expand the Lunara Jewels marketing/e-commerce site scope to integrate additional trust- and conversion-focused sections/pages (collections/categories, pricing & offers, customization, certifications/quality info, shipping, returns, payment info, reviews, FAQ, blog, order tracking, and privacy/terms) while keeping the existing lightweight inquiry-based ordering model (no customer accounts and no external payments).",
+  "architectural_notes": [
+    "Chatbot must be implemented as an internal, rule-based FAQ-style assistant (no external AI/chat services integration).",
+    "Incorporate the provided jewelry-site FAQ categories into the rule-based chatbot as additional intents/quick replies, but tailor answers to Lunara Jewels’ actual scope (oxidized silver focus, inquiry-based ordering, no account system, no external payments).",
+    "Any added pages (pricing/offers, customization, certifications, payment methods, order tracking, etc.) must remain consistent with the existing site constraints: inquiry-based ordering, no customer accounts, and no external payment processors; provide guidance and route users to Contact where needed."
+  ],
+  "known_issues": [
+    "User request to make the chatbot answer \"any questions\" may conflict with the constraint that it must remain an internal, rule-based assistant (no external AI).",
+    "Some requested chatbot FAQs assume capabilities/products that may not exist for Lunara Jewels (gold/diamond/hallmarking, online payments/UPI/COD/EMI, accounts/password resets, GST/making charges, physical store/appointments, same-day delivery). Bot responses must be constrained/clarified to avoid misinformation.",
+    "Adding generic e-commerce pages (certifications, payment methods, order tracking/accounts) risks implying unsupported capabilities; content and UI must be carefully constrained to Lunara Jewels’ actual inquiry-based process and available assurances.",
+    "Chatbot may not be answering the user’s specific question directly enough and may feel insufficiently conversational; refine response selection/tone while staying rule-based."
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-create-a-responsive-marketing-website-for-the-brand-lunara-jewels-with-the-tagline-timeless-silver-for-modern-souls-clearly-presenting-that-the-shop-sells-oxidized-silver-jewelry",
+      "title": "Create a responsive marketing website for the brand “Lunara Jewels” with the tagline “Timeless silver for modern souls”, clearly presenting that the shop sells oxidized silver jewelry.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-establish-a-coherent-visual-theme-for-lunara-jewels-and-apply-it-consistently-across-all-pages-colors-typography-spacing-buttons-cards-imagery-style-avoiding-blue-purple-as-primary-brand-colors",
+      "title": "Establish a coherent visual theme for Lunara Jewels and apply it consistently across all pages (colors, typography, spacing, buttons, cards, imagery style), avoiding blue/purple as primary brand colors.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-core-site-pages-and-navigation-home-hero-brand-story-values-shop-product-grid-product-details-about-and-contact",
+      "title": "Implement core site pages and navigation: Home (hero + brand story/values), Shop (product grid), Product Details, About, and Contact.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-lightweight-commerce-flow-without-external-payment-processors-allow-users-to-add-items-to-a-cart-review-the-cart-and-submit-a-purchase-inquiry-order-request-form-name-email-shipping-note-items-totals",
+      "title": "Add a lightweight commerce flow without external payment processors: allow users to add items to a cart, review the cart, and submit a purchase inquiry/order request form (name, email, shipping note, items, totals).",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-seed-the-shop-with-an-initial-set-of-example-oxidized-silver-jewelry-products-names-descriptions-prices-and-image-references-so-the-site-is-functional-immediately-after-deployment",
+      "title": "Seed the shop with an initial set of example oxidized silver jewelry products (names, descriptions, prices, and image references) so the site is functional immediately after deployment.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-required-brand-static-images-and-wire-them-into-the-frontend-as-static-assets-under-frontend-public-assets-generated",
+      "title": "Generate required brand static images and wire them into the frontend as static assets under frontend/public/assets/generated.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-admin-section-in-the-frontend-that-allows-an-authenticated-administrator-to-view-submitted-order-requests-from-the-backend-including-customer-name-customer-email-shipping-note-items-total-amount-and-timestamp",
+      "title": "Add an Admin section in the frontend that allows an authenticated administrator to view submitted order requests from the backend (including customer name, customer email, shipping note, items, total amount, and timestamp).",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-admin-section-in-the-frontend-that-allows-an-authenticated-administrator-to-manage-the-product-catalog-by-calling-the-existing-backend-admin-methods-addproduct-updateproduct-deleteproduct",
+      "title": "Add an Admin section in the frontend that allows an authenticated administrator to manage the product catalog by calling the existing backend admin methods (addProduct, updateProduct, deleteProduct).",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-admin-discovery-and-navigation-so-administrators-can-access-the-admin-section-from-the-existing-site-ui-without-disrupting-the-customer-shopping-flow",
+      "title": "Add admin discovery and navigation so administrators can access the Admin section from the existing site UI without disrupting the customer shopping flow.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-new-customer-facing-route-for-a-full-chat-window-page-e-g-chat-and-implement-a-new-react-page-component-that-renders-within-the-existing-sitelayout-header-footer-like-other-core-pages",
+      "title": "Add a new customer-facing route for a full chat window page (e.g., \"/chat\") and implement a new React page component that renders within the existing SiteLayout (header + footer) like other core pages.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-an-in-site-rule-based-helper-chatbot-for-the-chat-page-no-external-ai-services-that-supports-preset-faqs-and-guided-suggestions-relevant-to-lunara-jewels-materials-oxidized-silver-care-shipping-returns-guidance-ordering-via-inquiry-and-how-to-browse-products",
+      "title": "Implement an in-site, rule-based helper chatbot for the chat page (no external AI services) that supports preset FAQs and guided suggestions relevant to Lunara Jewels (materials, oxidized silver care, shipping/returns guidance, ordering via inquiry, and how to browse products).",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-expose-the-new-chat-page-in-site-navigation-so-customers-can-discover-it-without-disrupting-the-shopping-flow",
+      "title": "Expose the new chat page in site navigation so customers can discover it without disrupting the shopping flow.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-expand-the-in-site-rule-based-chatbot-frontend-src-utils-chatbot-ts-so-it-can-handle-a-significantly-broader-range-of-customer-questions-about-lunara-jewels-while-remaining-fully-local-no-external-ai-chat-services-add-many-more-intents-and-responses-covering-product-discovery-and-recommendations-by-category-style-occasion-product-details-materials-finish-care-sizing-fit-guidance-hypoallergenic-questions-pricing-promotions-shipping-timelines-and-costs-returns-exchanges-order-request-workflow-cart-submitting-an-order-request-what-happens-next-gift-packaging-and-custom-bespoke-requests-ensure-each-new-intent-includes-appropriate-quick-replies-that-guide-the-user-to-relevant-next-steps-or-site-pages",
+      "title": "Expand the in-site rule-based chatbot (frontend/src/utils/chatbot.ts) so it can handle a significantly broader range of customer questions about Lunara Jewels, while remaining fully local (no external AI/chat services). Add many more intents and responses covering: product discovery and recommendations (by category/style/occasion), product details (materials, finish, care, sizing/fit guidance, hypoallergenic questions), pricing/promotions, shipping timelines and costs, returns/exchanges, order/request workflow (cart, submitting an order request, what happens next), gift packaging, and custom/bespoke requests. Ensure each new intent includes appropriate quick replies that guide the user to relevant next steps or site pages.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-improve-chatbot-robustness-for-anything-style-questions-by-enhancing-matching-and-fallback-behavior-without-using-external-ai-add-basic-tolerance-for-punctuation-extra-whitespace-and-common-typos-and-implement-a-smarter-fallback-that-1-asks-1-2-clarifying-questions-when-the-user-message-is-ambiguous-and-2-offers-an-explicit-escalation-path-to-the-contact-page-for-questions-outside-the-bot-s-rule-coverage-update-the-chat-page-helper-text-to-clearly-state-the-bot-can-answer-most-questions-about-lunara-jewels-and-that-complex-off-topic-questions-may-be-directed-to-contacting-the-team",
+      "title": "Improve chatbot robustness for \"anything\"-style questions by enhancing matching and fallback behavior without using external AI. Add basic tolerance for punctuation/extra whitespace and common typos, and implement a smarter fallback that (1) asks 1–2 clarifying questions when the user message is ambiguous, and (2) offers an explicit escalation path to the Contact page for questions outside the bot’s rule coverage. Update the Chat page helper text to clearly state the bot can answer most questions about Lunara Jewels, and that complex/off-topic questions may be directed to contacting the team.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-rule-based-chatbot-intent-catalog-in-frontend-src-utils-chatbot-ts-to-cover-the-customer-question-categories-provided-by-the-user-product-types-materials-size-customization-pricing-offers-delivery-shipping-returns-exchange-payment-related-questions-store-information-quality-certification-gift-related-questions-account-order-help-jewelry-care-while-keeping-answers-accurate-for-lunara-jewels-oxidized-sterling-silver-jewelry-and-avoiding-misinformation-about-unsupported-capabilities",
+      "title": "Update the rule-based chatbot intent catalog in frontend/src/utils/chatbot.ts to cover the customer question categories provided by the user (product types/materials, size & customization, pricing & offers, delivery & shipping, returns & exchange, payment-related questions, store information, quality & certification, gift-related questions, account & order help, jewelry care) while keeping answers accurate for Lunara Jewels (oxidized sterling silver jewelry) and avoiding misinformation about unsupported capabilities.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-or-refine-intents-in-frontend-src-utils-chatbot-ts-specifically-for-the-user-provided-account-order-help-questions-aligning-them-with-the-current-site-behavior-no-customer-accounts-passwords-order-requests-submitted-via-cart-order-request-form-changes-cancellations-handled-via-contacting-the-team",
+      "title": "Add or refine intents in frontend/src/utils/chatbot.ts specifically for the user-provided 'Account & Order Help' questions, aligning them with the current site behavior (no customer accounts/passwords; order requests submitted via cart -> order request form; changes/cancellations handled via contacting the team).",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-or-refine-intents-in-frontend-src-utils-chatbot-ts-for-the-user-provided-payment-related-questions-ensuring-responses-match-the-site-s-lightweight-commerce-flow-no-external-payment-processor-online-checkout-and-clearly-explain-how-payment-is-arranged-after-an-order-request-is-confirmed",
+      "title": "Add or refine intents in frontend/src/utils/chatbot.ts for the user-provided payment-related questions, ensuring responses match the site's lightweight commerce flow (no external payment processor/online checkout) and clearly explain how payment is arranged after an order request is confirmed.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-or-refine-intents-in-frontend-src-utils-chatbot-ts-for-the-user-provided-store-information-and-quality-certification-questions-ensuring-responses-are-safe-and-do-not-claim-a-physical-store-appointments-or-certifications-that-are-not-explicitly-implemented-presented-on-the-site-when-uncertain-route-the-user-to-contact",
+      "title": "Add or refine intents in frontend/src/utils/chatbot.ts for the user-provided 'Store Information' and 'Quality & Certification' questions, ensuring responses are safe and do not claim a physical store, appointments, or certifications that are not explicitly implemented/presented on the site; when uncertain, route the user to Contact.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-new-customer-facing-pages-for-collections-categories-pricing-offers-customization-certifications-quality-assurance-shipping-delivery-returns-exchange-payment-methods-customer-reviews-testimonials-faq-blog-order-tracking-manual-inquiry-privacy-policy-and-terms-conditions-using-clear-english-copy-that-is-accurate-for-lunara-jewels-oxidized-sterling-silver-jewelry-and-does-not-claim-unsupported-capabilities-e-g-no-online-checkout-no-customer-accounts-no-physical-store-unless-explicitly-shown",
+      "title": "Add new customer-facing pages for: Collections/Categories, Pricing & Offers, Customization, Certifications & Quality Assurance, Shipping & Delivery, Returns & Exchange, Payment Methods, Customer Reviews/Testimonials, FAQ, Blog, Order Tracking (manual inquiry), Privacy Policy, and Terms & Conditions, using clear English copy that is accurate for Lunara Jewels (oxidized sterling silver jewelry) and does not claim unsupported capabilities (e.g., no online checkout, no customer accounts, no physical store unless explicitly shown).",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-integrate-the-new-pages-into-site-navigation-by-updating-the-header-and-footer-links-so-customers-can-easily-discover-them-without-disrupting-the-current-shopping-flow-home-shop-product-details-cart-order-request-contact-chat",
+      "title": "Integrate the new pages into site navigation by updating the header and footer links so customers can easily discover them without disrupting the current shopping flow (Home, Shop, Product Details, Cart, Order Request, Contact, Chat).",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-new-tanstack-router-routes-for-each-new-page-in-frontend-src-app-tsx-following-the-existing-route-definition-pattern-createroute-addchildren",
+      "title": "Add new TanStack Router routes for each new page in frontend/src/App.tsx, following the existing route definition pattern (createRoute + addChildren).",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-new-pages-are-aligned-with-the-existing-lightweight-inquiry-based-ordering-model-by-explicitly-explaining-where-relevant-that-customers-submit-an-order-request-and-the-team-follows-up-to-confirm-details-and-arrange-payment-and-by-avoiding-any-ux-that-suggests-an-online-payment-checkout",
+      "title": "Ensure the new pages are aligned with the existing lightweight inquiry-based ordering model by explicitly explaining (where relevant) that customers submit an order request and the team follows up to confirm details and arrange payment, and by avoiding any UX that suggests an online payment checkout.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-chat-quick-reply-navigation-handling-in-frontend-src-pages-chatpage-tsx-so-it-can-navigate-to-the-newly-added-help-policy-pages-when-the-chatbot-returns-corresponding-quick-replies-intents-e-g-navigate-shipping-navigate-returns-navigate-faq-navigate-payment-navigate-order-tracking-navigate-privacy-navigate-terms",
+      "title": "Update the Chat quick-reply navigation handling in frontend/src/pages/ChatPage.tsx so it can navigate to the newly added help/policy pages when the chatbot returns corresponding quick replies/intents (e.g., navigate-shipping, navigate-returns, navigate-faq, navigate-payment, navigate-order-tracking, navigate-privacy, navigate-terms).",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-rule-based-chatbot-response-selection-frontend-src-utils-chatbot-ts-so-it-answers-the-user-s-specific-question-more-directly-by-choosing-the-best-matching-intent-using-a-deterministic-scoring-approach-e-g-prefer-longer-more-specific-keyword-phrase-matches-handle-multiple-matches-and-avoid-over-triggering-broad-intents-like-shop-when-a-more-specific-intent-matches",
+      "title": "Update the rule-based chatbot response selection (frontend/src/utils/chatbot.ts) so it answers the user’s specific question more directly by choosing the best-matching intent using a deterministic scoring approach (e.g., prefer longer/more-specific keyword/phrase matches, handle multiple matches, and avoid over-triggering broad intents like “shop” when a more specific intent matches).",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-rewrite-and-or-refactor-chatbot-responses-in-frontend-src-utils-chatbot-ts-to-be-more-conversational-while-staying-accurate-to-the-site-s-capabilities-responses-should-acknowledge-the-user-s-question-topic-give-a-direct-answer-first-then-optionally-ask-a-short-follow-up-question-and-provide-2-4-relevant-quick-replies-that-guide-next-steps",
+      "title": "Rewrite and/or refactor chatbot responses in frontend/src/utils/chatbot.ts to be more conversational while staying accurate to the site’s capabilities: responses should acknowledge the user’s question topic, give a direct answer first, then (optionally) ask a short follow-up question and provide 2–4 relevant quick replies that guide next steps.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-adjust-the-chat-page-copy-frontend-src-pages-chatpage-tsx-to-set-clearer-expectations-in-a-friendly-conversational-tone-that-the-assistant-answers-questions-best-when-asked-specifically-and-that-it-may-ask-a-quick-follow-up-when-details-are-missing-with-an-option-to-go-to-contact-for-anything-outside-coverage",
+      "title": "Adjust the Chat page copy (frontend/src/pages/ChatPage.tsx) to set clearer expectations in a friendly, conversational tone that the assistant answers questions best when asked specifically, and that it may ask a quick follow-up when details are missing (with an option to go to Contact for anything outside coverage).",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a website for the brand Lunara Jewels to showcase and sell oxidized silver jewelry, using the tagline \"Timeless silver for modern souls\".",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Create backend data models and APIs to support products and order requests, including basic CRUD needed for the frontend to list products and submit/read order requests.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Integrate a built-in rule-based chatbot as a full chat window page (no external AI services) to answer preset FAQs and guide customers.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Expand the in-site rule-based chatbot to handle a much broader range of customer questions (more comprehensive FAQ coverage, intents, and guided flows) while still avoiding external AI/chat service integrations.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Add additional customer-facing site pages/sections: Collections/Categories, Pricing & Offers, Customization, Certifications/Quality Assurance, Shipping & Delivery, Returns & Exchange, Payment Methods info, Customer Reviews/Testimonials, FAQ, Blog, Order Tracking (manual inquiry), and Privacy Policy + Terms & Conditions—integrated into navigation and aligned with Lunara Jewels’ inquiry-based flow (no accounts, no online payments).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Improve the rule-based chatbot so it answers the user’s specific question more directly and uses a more conversational tone (while remaining fully local/no external AI).",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Lunara Jewels",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

@@ -1,0 +1,60 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-17T15:58:46.361Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 3,
+    "implemented": 3,
+    "items": [
+      {
+        "id": "REQ-25",
+        "summary": "Update the rule-based chatbot response selection (frontend/src/utils/chatbot.ts) so it answers the user’s specific question more directly by choosing the best-matching intent using a deterministic scoring approach (e.g., prefer longer/more-specific keyword/phrase matches, handle multiple matches, and avoid over-triggering broad intents like “shop” when a more specific intent matches).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/utils/chatbot.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/utils/chatbot.ts"
+        ]
+      },
+      {
+        "id": "REQ-26",
+        "summary": "Rewrite and/or refactor chatbot responses in frontend/src/utils/chatbot.ts to be more conversational while staying accurate to the site’s capabilities: responses should acknowledge the user’s question topic, give a direct answer first, then (optionally) ask a short follow-up question and provide 2–4 relevant quick replies that guide next steps.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/utils/chatbot.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/utils/chatbot.ts"
+        ]
+      },
+      {
+        "id": "REQ-27",
+        "summary": "Adjust the Chat page copy (frontend/src/pages/ChatPage.tsx) to set clearer expectations in a friendly, conversational tone that the assistant answers questions best when asked specifically, and that it may ask a quick follow-up when details are missing (with an option to go to Contact for anything outside coverage).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/ChatPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/ChatPage.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/pages/ChatPage.tsx",
+    "frontend/src/utils/chatbot.ts",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-17T15:58:46.358Z",
+  "summary": "Diff updates the chatbot intent matching with a deterministic scoring/normalization approach and expands the intent catalog/responses. ChatPage was modified mainly to support many navigation quick-reply intents, but the diff snippet is truncated and does not show any updated helper/expectation copy. Some required behaviors (confidence threshold + clarifying questions) are not evidenced in the provided chatbot.ts excerpt.",
+  "missing_requirements": [
+    {
+      "id": "REQ-25",
+      "requirement": "If no intent meets a reasonable confidence threshold, the chatbot asks 1–2 clarifying questions instead of giving a generic unrelated answer.",
+      "reason": "The diff shows scoring and normalization, but does not show any selection logic that applies a minimum confidence threshold or returns a clarifying-question response when no intent qualifies (truncated excerpt ends mid-intent catalog).",
+      "evidence": [
+        "frontend/src/utils/chatbot.ts (truncated)"
+      ]
+    },
+    {
+      "id": "REQ-27",
+      "requirement": "Adjust the Chat page helper/intro copy to encourage specific questions, mention it may ask a short clarifying question, and provide an explicit escalation path to the Contact page.",
+      "reason": "In the visible portion of ChatPage.tsx, only the initial bot greeting message is shown; the /chat helper text (if any) is not visible in the truncated diff, so the requested copy changes and Contact escalation mention are not evidenced.",
+      "evidence": [
+        "frontend/src/pages/ChatPage.tsx (truncated)"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Added/expanded quick-reply navigation handling for many routes (collections, customization, quality/certifications, blog, reviews, privacy, terms, order-tracking, etc.) beyond the BuildRequest’s requested /chat copy adjustments and chatbot conversational/intent-selection improvements.",
+      "reason": "BuildRequest focuses on improving rule-based intent matching, conversational responses, and updating Chat page helper text; it does not request adding broad navigation support for many additional intents/routes in ChatPage behavior.",
+      "evidence": [
+        "frontend/src/pages/ChatPage.tsx (truncated)"
+      ]
+    }
+  ],
+  "confidence": 0.62,
+  "changed_files": [
+    "frontend-file-summaries.txt",
+    "frontend/src/pages/ChatPage.tsx",
+    "frontend/src/utils/chatbot.ts",
+    "project_state.json"
+  ]
+}
