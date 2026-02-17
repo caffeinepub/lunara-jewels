@@ -1,3 +1,5 @@
+import { CONTACT_INFO } from '@/config/contact';
+
 export interface ChatMessage {
   id: string;
   text: string;
@@ -359,377 +361,392 @@ const intents: Intent[] = [
     ],
   },
   {
-    keywords: ['same day', 'express', 'rush', 'urgent', 'fast delivery', 'quick delivery'],
-    phrases: ['same day delivery', 'express shipping', 'rush order', 'urgent delivery'],
+    keywords: ['same day', 'express', 'urgent', 'fast delivery', 'rush'],
+    phrases: ['same day delivery', 'express shipping', 'urgent delivery'],
     specificity: 9,
-    response: "Standard delivery is 5-10 business days. For urgent orders or expedited shipping, please contact us directly to discuss options. We'll do our best to accommodate your timeline!",
+    response: "For urgent or express delivery requests, please contact us directly. We'll do our best to accommodate your timeline and discuss expedited shipping options!",
     quickReplies: [
       { id: 'q62', text: 'Contact us', intent: 'navigate-contact' },
-      { id: 'q63', text: 'Place order', intent: 'navigate-order' },
+      { id: 'q63', text: 'Browse products', intent: 'navigate-shop' },
+    ],
+  },
+  {
+    keywords: ['packaging', 'gift wrap', 'gift box', 'wrapping', 'box'],
+    phrases: ['gift packaging', 'gift wrap', 'special packaging'],
+    specificity: 8,
+    response: "All our jewelry comes beautifully packaged! For special gift wrapping or custom packaging requests, please mention this when placing your order or contact us directly.",
+    quickReplies: [
+      { id: 'q64', text: 'Place order', intent: 'navigate-order' },
+      { id: 'q65', text: 'Contact us', intent: 'navigate-contact' },
     ],
   },
 
-  // 🔁 Returns & Exchange
+  // 🔄 Returns & Exchange
   {
-    keywords: ['return', 'refund', 'exchange', 'policy', 'send back', 'money back', 'unhappy', 'wrong'],
-    phrases: ['return policy', 'can i return', 'refund policy', 'exchange policy'],
+    keywords: ['return', 'returns', 'refund', 'money back'],
+    phrases: ['return policy', 'can i return', 'return item', 'get refund'],
     specificity: 8,
-    response: "We want you to love your jewelry! If you're not completely satisfied, please contact us within 14 days of receiving your order. We'll work with you on returns or exchanges. Items must be unworn and in original condition.",
-    quickReplies: [
-      { id: 'q64', text: 'Contact us', intent: 'navigate-contact' },
-      { id: 'q65', text: 'Browse products', intent: 'navigate-shop' },
-    ],
-  },
-  {
-    keywords: ['exchange jewelry', 'swap', 'change item'],
-    phrases: ['can i exchange', 'exchange for', 'swap item'],
-    specificity: 9,
-    response: "Yes, exchanges are possible within 14 days of receiving your order! Items must be unworn and in original condition. Contact us to arrange an exchange, and we'll guide you through the process.",
+    response: "We want you to love your jewelry! If you're not completely satisfied, we accept returns within a reasonable timeframe. Please contact us to initiate a return and we'll guide you through the process.",
     quickReplies: [
       { id: 'q66', text: 'Contact us', intent: 'navigate-contact' },
-      { id: 'q67', text: 'View collection', intent: 'navigate-shop' },
+      { id: 'q67', text: 'Browse products', intent: 'navigate-shop' },
     ],
   },
   {
-    keywords: ['damaged', 'broken', 'defect'],
-    phrases: ['damaged product', 'receive damaged', 'broken item', 'defective'],
-    specificity: 10,
-    response: "I'm so sorry if you received a damaged item! Please contact us immediately with photos of the damage. We'll make it right—either by sending a replacement or issuing a refund. Your satisfaction is our priority!",
+    keywords: ['exchange', 'swap', 'change', 'different size', 'wrong size'],
+    phrases: ['exchange item', 'change size', 'swap for different'],
+    specificity: 8,
+    response: "Yes, we can help with exchanges! If you need a different size or style, contact us and we'll arrange an exchange. We want to make sure you get the perfect piece!",
     quickReplies: [
       { id: 'q68', text: 'Contact us', intent: 'navigate-contact' },
+      { id: 'q69', text: 'Sizing help', intent: 'sizing' },
     ],
   },
   {
-    keywords: ['return days', 'return period', 'return window'],
-    phrases: ['how many days return', 'return period', 'return window'],
+    keywords: ['damaged', 'broken', 'defect', 'defective', 'problem', 'issue', 'wrong item'],
+    phrases: ['received damaged', 'item broken', 'wrong item', 'defective product'],
     specificity: 9,
-    response: "You have 14 days from receiving your order to initiate a return or exchange. Items must be unworn and in original condition. Contact us within this period, and we'll assist you with the process!",
+    response: "We're so sorry to hear that! If you received a damaged or incorrect item, please contact us immediately with photos. We'll resolve this right away—either with a replacement or full refund.",
     quickReplies: [
-      { id: 'q69', text: 'Contact us', intent: 'navigate-contact' },
-      { id: 'q70', text: 'Browse jewelry', intent: 'navigate-shop' },
+      { id: 'q70', text: 'Contact us now', intent: 'navigate-contact' },
     ],
   },
 
-  // 🧾 Payment Related
+  // 💳 Payment
   {
-    keywords: ['payment', 'pay', 'payment method', 'how to pay', 'payment option', 'accept payment'],
-    phrases: ['payment method', 'how to pay', 'payment options', 'accept payment'],
+    keywords: ['payment', 'pay', 'payment method', 'payment option', 'how to pay'],
+    phrases: ['payment methods', 'how do i pay', 'payment options', 'accepted payments'],
     specificity: 7,
-    response: "We work with each customer individually to arrange payment. After you submit an order request, we'll contact you to confirm details and discuss payment options that work for you—including bank transfers and other secure options.",
+    response: "We accept various payment methods to make your purchase convenient! Payment details and options will be confirmed when you submit your order request. We'll work with you to arrange secure payment.",
     quickReplies: [
       { id: 'q71', text: 'Submit order request', intent: 'navigate-order' },
       { id: 'q72', text: 'Contact us', intent: 'navigate-contact' },
     ],
   },
   {
-    keywords: ['online payment', 'payment safe', 'secure payment', 'safe to pay'],
-    phrases: ['payment safe', 'secure payment', 'safe to pay', 'payment security'],
+    keywords: ['cod', 'cash on delivery', 'pay on delivery'],
+    phrases: ['cash on delivery', 'cod available', 'pay when delivered'],
     specificity: 9,
-    response: "Yes, we ensure secure transactions! Payment details and methods are discussed when we confirm your order. We work with trusted payment systems to protect your information. Your security is important to us!",
+    response: "Cash on delivery availability depends on your location. Please contact us or mention COD preference when submitting your order request, and we'll let you know if it's available for your area!",
     quickReplies: [
-      { id: 'q73', text: 'Place order', intent: 'navigate-order' },
+      { id: 'q73', text: 'Submit order request', intent: 'navigate-order' },
       { id: 'q74', text: 'Contact us', intent: 'navigate-contact' },
     ],
   },
   {
-    keywords: ['cod', 'cash on delivery', 'pay on delivery', 'pay when receive'],
-    phrases: ['cash on delivery', 'cod available', 'pay on delivery'],
-    specificity: 9,
-    response: "Payment options including cash on delivery can be discussed when we confirm your order. We work with each customer to arrange payment that suits your preferences. Please submit an order request or contact us!",
+    keywords: ['upi', 'gpay', 'phonepe', 'paytm', 'digital payment'],
+    phrases: ['upi payment', 'google pay', 'phonepe payment'],
+    specificity: 8,
+    response: "We accept digital payment methods including UPI! Specific payment instructions will be provided when you place your order. We make payment easy and secure!",
     quickReplies: [
-      { id: 'q75', text: 'Submit order request', intent: 'navigate-order' },
+      { id: 'q75', text: 'Place order', intent: 'navigate-order' },
       { id: 'q76', text: 'Contact us', intent: 'navigate-contact' },
     ],
   },
   {
-    keywords: ['credit card', 'debit card', 'card payment', 'visa', 'mastercard'],
-    phrases: ['credit card', 'debit card', 'card payment', 'pay by card'],
-    specificity: 9,
-    response: "Card payment options can be discussed when we confirm your order. We work with trusted payment systems to ensure secure transactions. Would you like to submit an order request?",
+    keywords: ['secure', 'safe', 'security', 'payment security'],
+    phrases: ['is payment secure', 'safe to pay', 'payment security'],
+    specificity: 8,
+    response: "Yes, absolutely! We use secure payment methods and handle all transactions with care. Your payment information is protected, and we'll provide clear payment instructions when you place your order.",
     quickReplies: [
-      { id: 'q77', text: 'Place order', intent: 'navigate-order' },
+      { id: 'q77', text: 'Submit order request', intent: 'navigate-order' },
       { id: 'q78', text: 'Contact us', intent: 'navigate-contact' },
     ],
   },
-  {
-    keywords: ['upi', 'paytm', 'gpay', 'phonepe', 'digital payment'],
-    phrases: ['upi payment', 'digital wallet', 'paytm', 'google pay'],
-    specificity: 9,
-    response: "Digital payment options including UPI can be discussed when we confirm your order. We're flexible and work with various payment methods. Please submit an order request or contact us!",
-    quickReplies: [
-      { id: 'q79', text: 'Submit order request', intent: 'navigate-order' },
-      { id: 'q80', text: 'Contact us', intent: 'navigate-contact' },
-    ],
-  },
 
-  // 🏪 Store & Contact
+  // 🎁 Gifting
   {
-    keywords: ['store', 'shop location', 'physical store', 'visit', 'address', 'where are you'],
-    phrases: ['physical store', 'store location', 'visit store', 'shop address'],
-    specificity: 8,
-    response: "We primarily operate online to bring our handcrafted jewelry directly to you! For specific location questions or to arrange a meeting, please contact us. We're here to help!",
-    quickReplies: [
-      { id: 'q81', text: 'Contact us', intent: 'navigate-contact' },
-      { id: 'q82', text: 'Browse online', intent: 'navigate-shop' },
-    ],
-  },
-  {
-    keywords: ['contact', 'reach', 'email', 'phone', 'call', 'message', 'talk', 'speak'],
-    phrases: ['contact you', 'reach you', 'get in touch', 'contact details'],
+    keywords: ['gift', 'present', 'gifting', 'gift for'],
+    phrases: ['gift ideas', 'looking for gift', 'gift someone', 'present for'],
     specificity: 7,
-    response: "I'd be happy to connect you with our team! You can reach us through our contact page where you'll find our email and a contact form. We typically respond within 24 hours. What would you like to discuss?",
+    response: "Our oxidized silver jewelry makes wonderful gifts! Each piece is unique and comes beautifully packaged. Whether it's for a birthday, anniversary, or special occasion, we have something special. What's the occasion?",
     quickReplies: [
-      { id: 'q83', text: 'Contact us', intent: 'navigate-contact' },
-      { id: 'q84', text: 'Browse products', intent: 'navigate-shop' },
+      { id: 'q79', text: 'Browse collection', intent: 'navigate-shop' },
+      { id: 'q80', text: 'Gift packaging', intent: 'packaging' },
+      { id: 'q81', text: 'Contact us', intent: 'navigate-contact' },
     ],
   },
   {
-    keywords: ['hours', 'open', 'timing', 'when open', 'business hours'],
-    phrases: ['business hours', 'opening hours', 'when open', 'store hours'],
+    keywords: ['anniversary', 'birthday', 'valentine', 'mothers day', 'fathers day'],
+    phrases: ['anniversary gift', 'birthday present', 'valentine gift'],
     specificity: 8,
-    response: "We're available online 24/7 for browsing! For inquiries, we typically respond to messages within 24 hours during business days. Feel free to contact us anytime, and we'll get back to you promptly!",
+    response: "Perfect! Our handcrafted silver jewelry makes a thoughtful, lasting gift for any special occasion. Each piece tells a story and will be treasured for years. Would you like to see our collection?",
+    quickReplies: [
+      { id: 'q82', text: 'View jewelry', intent: 'navigate-shop' },
+      { id: 'q83', text: 'Gift wrapping', intent: 'packaging' },
+      { id: 'q84', text: 'Contact us', intent: 'navigate-contact' },
+    ],
+  },
+  {
+    keywords: ['gift card', 'voucher', 'gift certificate'],
+    phrases: ['gift card', 'gift voucher', 'gift certificate'],
+    specificity: 9,
+    response: "For gift cards or vouchers, please contact us directly. We can discuss options to create a special gift certificate for your loved one!",
     quickReplies: [
       { id: 'q85', text: 'Contact us', intent: 'navigate-contact' },
-      { id: 'q86', text: 'Browse shop', intent: 'navigate-shop' },
+      { id: 'q86', text: 'Browse jewelry', intent: 'navigate-shop' },
     ],
   },
 
-  // 🎁 Gifts & Occasions
+  // 🛠️ Care & Maintenance
   {
-    keywords: ['gift', 'present', 'gifting', 'birthday', 'anniversary', 'occasion'],
-    phrases: ['gift idea', 'gift for', 'present for', 'birthday gift'],
-    specificity: 7,
-    response: "Our oxidized silver jewelry makes wonderful gifts! For everyday elegance, consider rings or studs. For special occasions, our statement pendants or drop earrings are perfect. We can also discuss gift wrapping options. What's the occasion?",
+    keywords: ['care', 'maintain', 'maintenance', 'clean', 'cleaning', 'polish', 'tarnish'],
+    phrases: ['how to care', 'care instructions', 'how to clean', 'maintain jewelry'],
+    specificity: 8,
+    response: "Oxidized silver develops character over time! To maintain it: (1) Store in a dry place, (2) Clean gently with a soft cloth, (3) Avoid harsh chemicals. The oxidized finish is meant to age beautifully—embrace the patina! Want more detailed care tips?",
     quickReplies: [
-      { id: 'q87', text: 'Browse collection', intent: 'navigate-shop' },
-      { id: 'q88', text: 'Custom options', intent: 'custom' },
-      { id: 'q89', text: 'Contact us', intent: 'navigate-contact' },
+      { id: 'q87', text: 'Contact for details', intent: 'navigate-contact' },
+      { id: 'q88', text: 'Browse products', intent: 'navigate-shop' },
     ],
   },
   {
-    keywords: ['gift wrap', 'wrapping', 'gift box', 'packaging', 'gift packaging'],
-    phrases: ['gift wrapping', 'gift box', 'special packaging'],
+    keywords: ['water', 'shower', 'swim', 'waterproof', 'water resistant'],
+    phrases: ['wear in water', 'shower with jewelry', 'waterproof jewelry'],
     specificity: 9,
-    response: "We can discuss gift wrapping and special packaging options! Please mention your gift needs when you place your order or contact us directly. We'll make sure your gift looks beautiful!",
+    response: "While sterling silver won't be damaged by water, we recommend removing your jewelry before showering, swimming, or exercising. This helps preserve the oxidized finish and prevents exposure to chemicals in soaps and chlorine.",
     quickReplies: [
-      { id: 'q90', text: 'Place order', intent: 'navigate-order' },
+      { id: 'q89', text: 'More care tips', intent: 'care' },
+      { id: 'q90', text: 'Browse collection', intent: 'navigate-shop' },
+    ],
+  },
+  {
+    keywords: ['warranty', 'guarantee', 'lifetime', 'durability'],
+    phrases: ['warranty period', 'lifetime guarantee', 'how long last'],
+    specificity: 8,
+    response: "Our jewelry is crafted to last! Sterling silver is durable and, with proper care, will be beautiful for years. For specific warranty details or concerns about a piece, please contact us directly.",
+    quickReplies: [
       { id: 'q91', text: 'Contact us', intent: 'navigate-contact' },
+      { id: 'q92', text: 'Care instructions', intent: 'care' },
+    ],
+  },
+  {
+    keywords: ['repair', 'fix', 'broken', 'resize', 'resizing'],
+    phrases: ['repair jewelry', 'fix broken', 'resize ring', 'resizing service'],
+    specificity: 9,
+    response: "We can help with repairs and resizing! Please contact us with details about what needs to be done, and we'll let you know the options, timeline, and cost. We want your jewelry to last a lifetime!",
+    quickReplies: [
+      { id: 'q93', text: 'Contact us', intent: 'navigate-contact' },
+      { id: 'q94', text: 'Browse products', intent: 'navigate-shop' },
     ],
   },
 
-  // 🔧 Materials & Care
+  // 🏆 Quality & Materials
   {
     keywords: ['material', 'materials', 'made of', 'silver', 'sterling', 'metal'],
     phrases: ['what material', 'made from', 'sterling silver', 'silver quality'],
     specificity: 7,
-    response: "All our jewelry is crafted from genuine sterling silver (92.5% pure silver). The oxidized finish is a professional treatment that creates the signature darkened patina, highlighting intricate details and giving each piece a timeless, vintage character. Want to know more about care?",
+    response: "All our jewelry is crafted from genuine sterling silver (92.5% pure silver). The oxidized finish is a professional treatment that creates the signature darkened patina, highlighting intricate details. It's authentic, high-quality silver!",
     quickReplies: [
-      { id: 'q92', text: 'Care instructions', intent: 'care' },
-      { id: 'q93', text: 'View products', intent: 'navigate-shop' },
-      { id: 'q94', text: 'Quality info', intent: 'quality' },
-    ],
-  },
-  {
-    keywords: ['oxidized', 'oxidation', 'black', 'dark', 'darkened', 'patina', 'finish'],
-    phrases: ['oxidized finish', 'why black', 'dark finish', 'oxidation process'],
-    specificity: 9,
-    response: "The oxidized finish is an intentional, professional treatment that creates the signature darkened patina on sterling silver. This finish highlights intricate details and gives each piece a unique vintage aesthetic. The patina develops beautifully over time with wear!",
-    quickReplies: [
-      { id: 'q95', text: 'Care tips', intent: 'care' },
+      { id: 'q95', text: 'Quality details', intent: 'quality' },
       { id: 'q96', text: 'Browse collection', intent: 'navigate-shop' },
+      { id: 'q97', text: 'Care tips', intent: 'care' },
     ],
   },
   {
-    keywords: ['care', 'clean', 'maintain', 'maintenance', 'polish', 'tarnish'],
-    phrases: ['how to care', 'how to clean', 'care instructions', 'maintenance tips'],
-    specificity: 8,
-    response: "Caring for oxidized silver is easy! Store pieces in a dry place, avoid harsh chemicals, and gently clean with a soft cloth. The oxidized finish is meant to develop character over time. For deep cleaning, use mild soap and water. Want detailed care instructions?",
-    quickReplies: [
-      { id: 'q97', text: 'Contact for details', intent: 'navigate-contact' },
-      { id: 'q98', text: 'Browse jewelry', intent: 'navigate-shop' },
-    ],
-  },
-  {
-    keywords: ['hypoallergenic', 'allergy', 'allergic', 'sensitive skin', 'skin reaction'],
-    phrases: ['hypoallergenic', 'sensitive skin', 'skin allergy', 'allergic reaction'],
-    specificity: 9,
-    response: "Sterling silver is generally hypoallergenic and suitable for most people with sensitive skin. However, if you have specific metal allergies, please contact us to discuss your concerns. We want to ensure you can wear our jewelry comfortably!",
-    quickReplies: [
-      { id: 'q99', text: 'Contact us', intent: 'navigate-contact' },
-      { id: 'q100', text: 'View earrings', intent: 'navigate-shop' },
-    ],
-  },
-  {
-    keywords: ['waterproof', 'water resistant', 'shower', 'swim', 'water'],
-    phrases: ['wear in water', 'waterproof', 'shower with', 'swim with'],
-    specificity: 9,
-    response: "While sterling silver won't be damaged by water, we recommend removing your jewelry before showering, swimming, or exercising. This helps preserve the oxidized finish and prevents exposure to harsh chemicals. Proper care ensures your pieces last longer!",
-    quickReplies: [
-      { id: 'q101', text: 'Care guide', intent: 'care' },
-      { id: 'q102', text: 'Browse collection', intent: 'navigate-shop' },
-    ],
-  },
-  {
-    keywords: ['durable', 'durability', 'last', 'long lasting', 'lifetime', 'quality'],
-    phrases: ['how long last', 'durable', 'quality', 'lifetime'],
+    keywords: ['quality', 'craftsmanship', 'handmade', 'handcrafted', 'artisan'],
+    phrases: ['quality assurance', 'handcrafted quality', 'artisan made'],
     specificity: 7,
-    response: "Our sterling silver jewelry is crafted for durability and designed to last for years with proper care. The oxidized finish develops character over time, making each piece more unique. Quality craftsmanship ensures your jewelry can be treasured for a lifetime!",
+    response: "Every piece is handcrafted by skilled artisans with attention to detail. We use premium sterling silver and traditional oxidation techniques. Each piece is unique, showcasing the beauty of handmade craftsmanship. Quality is our promise!",
     quickReplies: [
-      { id: 'q103', text: 'Quality details', intent: 'quality' },
-      { id: 'q104', text: 'Care tips', intent: 'care' },
-      { id: 'q105', text: 'Browse shop', intent: 'navigate-shop' },
+      { id: 'q98', text: 'About our craft', intent: 'navigate-about' },
+      { id: 'q99', text: 'View products', intent: 'navigate-shop' },
+      { id: 'q100', text: 'Materials info', intent: 'materials' },
+    ],
+  },
+  {
+    keywords: ['oxidized', 'oxidation', 'black', 'dark', 'antique', 'vintage'],
+    phrases: ['oxidized finish', 'why black', 'antique look', 'vintage style'],
+    specificity: 8,
+    response: "The oxidized finish is what makes our jewelry special! It's a controlled darkening process that creates depth and highlights intricate details. This 'antique' or 'vintage' look is intentional and adds character. The patina will evolve beautifully over time!",
+    quickReplies: [
+      { id: 'q101', text: 'View collection', intent: 'navigate-shop' },
+      { id: 'q102', text: 'Care instructions', intent: 'care' },
+      { id: 'q103', text: 'About us', intent: 'navigate-about' },
+    ],
+  },
+  {
+    keywords: ['hypoallergenic', 'allergy', 'allergic', 'sensitive skin', 'nickel free'],
+    phrases: ['hypoallergenic jewelry', 'nickel free', 'sensitive skin', 'cause allergy'],
+    specificity: 9,
+    response: "Sterling silver (92.5% pure silver) is generally hypoallergenic and safe for most people with sensitive skin. It's nickel-free! However, if you have specific metal allergies, please consult with us before purchasing.",
+    quickReplies: [
+      { id: 'q104', text: 'Contact us', intent: 'navigate-contact' },
+      { id: 'q105', text: 'Browse earrings', intent: 'earring' },
+      { id: 'q106', text: 'Materials info', intent: 'materials' },
+    ],
+  },
+  {
+    keywords: ['hallmark', 'stamp', 'certification', 'certified', 'authentic'],
+    phrases: ['hallmark stamp', 'certified silver', 'authenticity certificate'],
+    specificity: 9,
+    response: "Our sterling silver jewelry meets quality standards for 92.5% pure silver. For specific questions about hallmarking or certification, please contact us directly and we'll provide detailed information!",
+    quickReplies: [
+      { id: 'q107', text: 'Contact us', intent: 'navigate-contact' },
+      { id: 'q108', text: 'Quality details', intent: 'quality' },
     ],
   },
 
-  // 📜 Policies & Account
+  // 📞 Contact & Support
   {
-    keywords: ['warranty', 'guarantee', 'certificate', 'certification'],
-    phrases: ['warranty', 'guarantee', 'certificate', 'quality certificate'],
-    specificity: 8,
-    response: "We stand behind the quality of our handcrafted jewelry! For specific warranty details and quality certifications, please contact us. We're committed to your satisfaction and the authenticity of every piece.",
-    quickReplies: [
-      { id: 'q106', text: 'Contact us', intent: 'navigate-contact' },
-      { id: 'q107', text: 'Quality info', intent: 'quality' },
-    ],
-  },
-  {
-    keywords: ['account', 'login', 'register', 'sign up', 'profile'],
-    phrases: ['create account', 'sign up', 'register', 'login'],
+    keywords: ['contact', 'reach', 'call', 'email', 'phone', 'talk', 'speak'],
+    phrases: ['contact you', 'how to reach', 'contact details', 'get in touch'],
     specificity: 7,
-    response: "You don't need an account to browse or place an order! Simply submit an order request with your details, and we'll contact you to confirm everything. It's that simple!",
+    response: `You can reach us at:\n📧 Email: ${CONTACT_INFO.email}\n📱 Phone: ${CONTACT_INFO.phoneFormatted}\n📍 Location: ${CONTACT_INFO.location}\n\nWe're here to help with any questions!`,
     quickReplies: [
-      { id: 'q108', text: 'Place order', intent: 'navigate-order' },
-      { id: 'q109', text: 'Browse shop', intent: 'navigate-shop' },
-    ],
-  },
-  {
-    keywords: ['order', 'ordering', 'buy', 'purchase', 'checkout'],
-    phrases: ['how to order', 'place order', 'how to buy', 'purchase process'],
-    specificity: 6,
-    response: "Ordering is easy! Browse our collection, then submit an order request with your details and the items you'd like. We'll contact you to confirm everything and arrange payment and shipping. Ready to get started?",
-    quickReplies: [
+      { id: 'q109', text: 'Go to contact page', intent: 'navigate-contact' },
       { id: 'q110', text: 'Browse products', intent: 'navigate-shop' },
-      { id: 'q111', text: 'Submit order request', intent: 'navigate-order' },
-      { id: 'q112', text: 'Contact us', intent: 'navigate-contact' },
+    ],
+  },
+  {
+    keywords: ['hours', 'open', 'timing', 'business hours', 'when open'],
+    phrases: ['business hours', 'opening hours', 'when are you open'],
+    specificity: 8,
+    response: "Our business hours are:\nMonday - Friday: 10am - 6pm\nSaturday: 11am - 4pm\nSunday: Closed\n\nFeel free to contact us during these times, or submit an inquiry anytime!",
+    quickReplies: [
+      { id: 'q111', text: 'Contact us', intent: 'navigate-contact' },
+      { id: 'q112', text: 'Browse shop', intent: 'navigate-shop' },
+    ],
+  },
+  {
+    keywords: ['visit', 'store', 'showroom', 'physical store', 'location', 'address'],
+    phrases: ['visit store', 'physical location', 'showroom address', 'where located'],
+    specificity: 8,
+    response: `We're located in ${CONTACT_INFO.location}! For our exact address and to schedule a visit, please contact us directly. We'd love to show you our collection in person!`,
+    quickReplies: [
+      { id: 'q113', text: 'Contact us', intent: 'navigate-contact' },
+      { id: 'q114', text: 'Browse online', intent: 'navigate-shop' },
+    ],
+  },
+  {
+    keywords: ['whatsapp', 'social media', 'instagram', 'facebook'],
+    phrases: ['whatsapp number', 'social media', 'instagram page', 'facebook page'],
+    specificity: 8,
+    response: `For the fastest response, reach us at:\n📧 ${CONTACT_INFO.email}\n📱 ${CONTACT_INFO.phoneFormatted}\n\nFor social media and other contact options, please visit our contact page!`,
+    quickReplies: [
+      { id: 'q115', text: 'Contact page', intent: 'navigate-contact' },
+      { id: 'q116', text: 'Browse jewelry', intent: 'navigate-shop' },
     ],
   },
 
-  // 🌟 About & Brand
+  // 🛒 Ordering Process
   {
-    keywords: ['about', 'story', 'brand', 'company', 'who', 'lunara'],
-    phrases: ['about lunara', 'your story', 'brand story', 'who are you'],
-    specificity: 6,
-    response: "Lunara Jewels specializes in handcrafted oxidized silver jewelry. Each piece is created with attention to detail, celebrating the unique beauty of oxidized silver's vintage aesthetic. We're passionate about quality craftsmanship and timeless design. Want to learn more?",
+    keywords: ['order', 'buy', 'purchase', 'how to order', 'place order'],
+    phrases: ['how to order', 'place an order', 'how to buy', 'purchase process'],
+    specificity: 7,
+    response: "Ordering is easy! Browse our collection, add items to your cart, and submit an order request with your details. We'll confirm availability, finalize pricing, and arrange payment and delivery. Ready to start?",
     quickReplies: [
-      { id: 'q113', text: 'About us', intent: 'navigate-about' },
-      { id: 'q114', text: 'Browse collection', intent: 'navigate-shop' },
-      { id: 'q115', text: 'Contact us', intent: 'navigate-contact' },
+      { id: 'q117', text: 'Browse shop', intent: 'navigate-shop' },
+      { id: 'q118', text: 'Submit order request', intent: 'navigate-order' },
+      { id: 'q119', text: 'Contact us', intent: 'navigate-contact' },
     ],
   },
   {
-    keywords: ['handmade', 'handcrafted', 'artisan', 'craft', 'craftsmanship'],
-    phrases: ['handmade', 'handcrafted', 'artisan jewelry', 'craftsmanship'],
-    specificity: 8,
-    response: "Yes! Every piece is handcrafted with attention to detail. Our artisans specialize in oxidized silver techniques, creating unique jewelry that showcases traditional craftsmanship with contemporary design. Each piece is truly one-of-a-kind!",
+    keywords: ['bulk', 'wholesale', 'bulk order', 'large quantity', 'multiple pieces'],
+    phrases: ['bulk order', 'wholesale price', 'large quantity', 'buy multiple'],
+    specificity: 9,
+    response: "We welcome bulk orders! For wholesale pricing or large quantity purchases, please contact us directly with your requirements. We'll provide a custom quote and discuss timelines!",
     quickReplies: [
-      { id: 'q116', text: 'About our craft', intent: 'navigate-about' },
-      { id: 'q117', text: 'View collection', intent: 'navigate-shop' },
+      { id: 'q120', text: 'Contact us', intent: 'navigate-contact' },
+      { id: 'q121', text: 'View products', intent: 'navigate-shop' },
+    ],
+  },
+  {
+    keywords: ['cancel', 'cancellation', 'cancel order'],
+    phrases: ['cancel order', 'cancellation policy', 'can i cancel'],
+    specificity: 9,
+    response: "If you need to cancel an order, please contact us as soon as possible. If the order hasn't been processed or shipped yet, we can usually accommodate cancellations. Reach out and we'll help!",
+    quickReplies: [
+      { id: 'q122', text: 'Contact us', intent: 'navigate-contact' },
+    ],
+  },
+
+  // ℹ️ About & General Info
+  {
+    keywords: ['about', 'who are you', 'story', 'brand', 'company'],
+    phrases: ['about you', 'your story', 'about lunara', 'who is lunara'],
+    specificity: 6,
+    response: "Lunara Jewels specializes in handcrafted oxidized silver jewelry. Each piece is created with passion and attention to detail, blending traditional craftsmanship with modern design. We believe jewelry should tell your story! Want to learn more?",
+    quickReplies: [
+      { id: 'q123', text: 'About us', intent: 'navigate-about' },
+      { id: 'q124', text: 'View collection', intent: 'navigate-shop' },
+      { id: 'q125', text: 'Contact us', intent: 'navigate-contact' },
     ],
   },
   {
     keywords: ['review', 'reviews', 'testimonial', 'feedback', 'customer review'],
-    phrases: ['customer reviews', 'testimonials', 'what customers say'],
+    phrases: ['customer reviews', 'what customers say', 'testimonials', 'feedback'],
     specificity: 7,
-    response: "We're proud of our customer feedback! You can read reviews from happy customers who love their Lunara Jewels pieces. Want to see what they're saying?",
+    response: "Our customers love our handcrafted jewelry! Many appreciate the unique oxidized finish, quality craftsmanship, and personal touch. Want to see what they're saying?",
     quickReplies: [
-      { id: 'q118', text: 'Read reviews', intent: 'navigate-reviews' },
-      { id: 'q119', text: 'Browse products', intent: 'navigate-shop' },
+      { id: 'q126', text: 'Read reviews', intent: 'navigate-reviews' },
+      { id: 'q127', text: 'Browse products', intent: 'navigate-shop' },
+    ],
+  },
+  {
+    keywords: ['faq', 'frequently asked', 'common questions'],
+    phrases: ['frequently asked', 'common questions', 'faq page'],
+    specificity: 7,
+    response: "I can answer many common questions right here! But if you'd like to browse our full FAQ, I can direct you there. What would you like to know?",
+    quickReplies: [
+      { id: 'q128', text: 'View FAQ', intent: 'navigate-faq' },
+      { id: 'q129', text: 'Ask me anything', intent: 'help' },
+      { id: 'q130', text: 'Contact us', intent: 'navigate-contact' },
     ],
   },
 
-  // ❓ Help & Support
+  // 🧭 Navigation Intents (for quick replies)
   {
-    keywords: ['help', 'support', 'assist', 'question', 'problem', 'issue'],
-    phrases: ['need help', 'have question', 'need assistance'],
-    specificity: 4,
-    response: "I'm here to help! What specific question do you have? I can assist with products, materials, sizing, shipping, returns, payments, or ordering. For complex questions, I can connect you with our team!",
-    quickReplies: [
-      { id: 'q120', text: 'Shipping info', intent: 'shipping' },
-      { id: 'q121', text: 'Returns policy', intent: 'return' },
-      { id: 'q122', text: 'Payment options', intent: 'payment' },
-      { id: 'q123', text: 'Contact us', intent: 'navigate-contact' },
-    ],
+    keywords: ['navigate-shop'],
+    specificity: 10,
+    response: "Taking you to our shop...",
+    quickReplies: [],
   },
   {
-    keywords: ['thanks', 'thank you', 'appreciate', 'great', 'awesome', 'helpful'],
-    specificity: 5,
-    response: "You're very welcome! I'm glad I could help. Is there anything else you'd like to know about our jewelry?",
-    quickReplies: [
-      { id: 'q124', text: 'Browse products', intent: 'navigate-shop' },
-      { id: 'q125', text: 'Place order', intent: 'navigate-order' },
-      { id: 'q126', text: 'Contact us', intent: 'navigate-contact' },
-    ],
+    keywords: ['navigate-about'],
+    specificity: 10,
+    response: "Taking you to our about page...",
+    quickReplies: [],
   },
   {
-    keywords: ['bye', 'goodbye', 'see you', 'later', 'thanks bye'],
-    specificity: 5,
-    response: "Thank you for chatting with me! Feel free to return anytime you have questions. Happy shopping at Lunara Jewels!",
+    keywords: ['navigate-contact'],
+    specificity: 10,
+    response: "Taking you to our contact page...",
+    quickReplies: [],
+  },
+  {
+    keywords: ['navigate-order'],
+    specificity: 10,
+    response: "Taking you to the order request page...",
+    quickReplies: [],
+  },
+  {
+    keywords: ['navigate-faq'],
+    specificity: 10,
+    response: "Taking you to our FAQ page...",
+    quickReplies: [],
+  },
+  {
+    keywords: ['navigate-reviews'],
+    specificity: 10,
+    response: "Taking you to customer reviews...",
+    quickReplies: [],
+  },
+
+  // 🤷 Fallback & Help
+  {
+    keywords: ['help', 'assist', 'support', 'question'],
+    phrases: ['need help', 'can you help', 'i have question'],
+    specificity: 2,
+    response: "I'm here to help! I can answer questions about our products, shipping, returns, customization, care instructions, and more. What would you like to know?",
     quickReplies: [
-      { id: 'q127', text: 'Browse shop', intent: 'navigate-shop' },
+      { id: 'q131', text: 'Browse products', intent: 'navigate-shop' },
+      { id: 'q132', text: 'Shipping info', intent: 'shipping' },
+      { id: 'q133', text: 'Contact us', intent: 'navigate-contact' },
     ],
   },
 ];
 
-// Confidence threshold for intent matching
-const CONFIDENCE_THRESHOLD = 10;
-
-export function getBotResponse(userMessage: string): { response: string; quickReplies?: QuickReply[] } {
-  const normalized = normalizeText(userMessage);
-
-  // Handle very short or vague messages
-  if (normalized.length < 3 || normalized.split(' ').length === 1) {
-    return {
-      response: "I'd love to help! Could you tell me a bit more about what you're looking for? For example, are you interested in a specific type of jewelry, or do you have questions about shipping, returns, or ordering?",
-      quickReplies: [
-        { id: 'clarify1', text: 'Browse products', intent: 'navigate-shop' },
-        { id: 'clarify2', text: 'Shipping info', intent: 'shipping' },
-        { id: 'clarify3', text: 'Returns policy', intent: 'return' },
-        { id: 'clarify4', text: 'Contact us', intent: 'navigate-contact' },
-      ],
-    };
-  }
-
-  // Score all intents
-  const scoredIntents = intents
-    .map((intent) => ({
-      intent,
-      score: scoreIntent(intent, userMessage),
-    }))
-    .filter((item) => item.score > 0)
-    .sort((a, b) => b.score - a.score);
-
-  // Check if we have a confident match
-  if (scoredIntents.length > 0 && scoredIntents[0].score >= CONFIDENCE_THRESHOLD) {
-    const bestMatch = scoredIntents[0].intent;
-    return {
-      response: bestMatch.response,
-      quickReplies: bestMatch.quickReplies,
-    };
-  }
-
-  // Low confidence - ask clarifying question
-  return {
-    response: "I want to make sure I understand correctly. Are you asking about our products, shipping and delivery, returns and exchanges, payment options, or something else? Feel free to be more specific!",
-    quickReplies: [
-      { id: 'clarify5', text: 'Products & materials', intent: 'shop' },
-      { id: 'clarify6', text: 'Shipping & delivery', intent: 'shipping' },
-      { id: 'clarify7', text: 'Returns & exchanges', intent: 'return' },
-      { id: 'clarify8', text: 'Payment options', intent: 'payment' },
-      { id: 'clarify9', text: 'Contact us', intent: 'navigate-contact' },
-    ],
-  };
-}
-
+// Get initial quick replies for the welcome message
 export function getInitialQuickReplies(): QuickReply[] {
   return [
     { id: 'init1', text: 'Browse products', intent: 'navigate-shop' },
@@ -737,4 +754,37 @@ export function getInitialQuickReplies(): QuickReply[] {
     { id: 'init3', text: 'Place an order', intent: 'navigate-order' },
     { id: 'init4', text: 'Contact us', intent: 'navigate-contact' },
   ];
+}
+
+// Find best matching intent
+export function getBotResponse(userMessage: string): { response: string; quickReplies?: QuickReply[] } {
+  const scores = intents.map((intent) => ({
+    intent,
+    score: scoreIntent(intent, userMessage),
+  }));
+
+  // Sort by score descending
+  scores.sort((a, b) => b.score - a.score);
+
+  const bestMatch = scores[0];
+  const CONFIDENCE_THRESHOLD = 5; // Minimum score to consider a match
+
+  if (bestMatch && bestMatch.score >= CONFIDENCE_THRESHOLD) {
+    return {
+      response: bestMatch.intent.response,
+      quickReplies: bestMatch.intent.quickReplies,
+    };
+  }
+
+  // Fallback response with helpful suggestions
+  return {
+    response:
+      "I'm not quite sure about that. Could you rephrase your question? I can help with product info, shipping, returns, customization, care tips, and more. Or feel free to contact us directly for personalized assistance!",
+    quickReplies: [
+      { id: 'fallback1', text: 'Browse products', intent: 'navigate-shop' },
+      { id: 'fallback2', text: 'Contact us', intent: 'navigate-contact' },
+      { id: 'fallback3', text: 'Shipping info', intent: 'shipping' },
+      { id: 'fallback4', text: 'Care tips', intent: 'care' },
+    ],
+  };
 }

@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { toast } from 'sonner';
+import { CONTACT_INFO } from '@/config/contact';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -80,7 +81,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Email</h3>
-                    <p className="text-sm text-muted-foreground">hello@lunarajewels.com</p>
+                    <p className="text-sm text-muted-foreground">{CONTACT_INFO.email}</p>
                   </div>
                 </div>
 
@@ -90,7 +91,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Phone</h3>
-                    <p className="text-sm text-muted-foreground">+91 (555) 123-4567</p>
+                    <p className="text-sm text-muted-foreground">{CONTACT_INFO.phoneFormatted}</p>
                   </div>
                 </div>
 
@@ -100,7 +101,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Location</h3>
-                    <p className="text-sm text-muted-foreground">Mumbai, India</p>
+                    <p className="text-sm text-muted-foreground">{CONTACT_INFO.location}</p>
                   </div>
                 </div>
               </CardContent>
@@ -174,4 +175,3 @@ export default function ContactPage() {
     </div>
   );
 }
-

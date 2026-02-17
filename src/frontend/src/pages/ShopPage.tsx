@@ -24,6 +24,9 @@ export default function ShopPage() {
     });
   };
 
+  // Always show products or loading state - never empty
+  const displayProducts = products || [];
+
   return (
     <div className="container py-12">
       <div className="space-y-4 mb-12">
@@ -35,7 +38,7 @@ export default function ShopPage() {
 
       {isLoading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
+          {Array.from({ length: 20 }).map((_, i) => (
             <Card key={i} className="overflow-hidden">
               <Skeleton className="h-64 w-full" />
               <CardHeader>
@@ -50,7 +53,7 @@ export default function ShopPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products?.map((product) => (
+          {displayProducts.map((product) => (
             <Card key={Number(product.id)} className="overflow-hidden hover:shadow-elegant transition-shadow group">
               <Link to="/product/$productId" params={{ productId: String(product.id) }}>
                 <div className="aspect-square overflow-hidden bg-muted">
@@ -90,13 +93,6 @@ export default function ShopPage() {
           ))}
         </div>
       )}
-
-      {!isLoading && products?.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-lg text-muted-foreground">No products available at the moment.</p>
-        </div>
-      )}
     </div>
   );
 }
-

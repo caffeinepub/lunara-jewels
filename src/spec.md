@@ -1,12 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Make the Lunara Jewels rule-based chatbot select the most relevant intent for a user’s message and respond in a more conversational, question-focused way.
+**Goal:** Ensure the Shop collection grid ("Our Collection") always displays all 20 products by default.
 
 **Planned changes:**
-- Update intent matching in `frontend/src/utils/chatbot.ts` to use deterministic scoring that prefers more specific/longer matches, handles multiple matches, and avoids broad-intent over-triggering (e.g., “shop”).
-- Make intent matching tolerant of punctuation and extra whitespace, and add a confidence threshold so the bot asks 1–2 clarifying questions when it can’t confidently match an intent.
-- Rewrite/refactor chatbot responses in `frontend/src/utils/chatbot.ts` so answers are direct first, then optionally include a brief follow-up question plus 2–4 topic-relevant quick replies without implying unsupported site capabilities.
-- Update `/chat` helper copy in `frontend/src/pages/ChatPage.tsx` to encourage specific questions, set expectations about brief clarifying follow-ups, and point users to Contact for out-of-scope requests.
+- Update `frontend/src/pages/ShopPage.tsx` so the collection grid renders all 20 product cards (no slicing/pagination) when the catalog contains 20 items.
+- Update `frontend/src/hooks/useProducts.ts` to prevent actor/query initialization states from resulting in fewer than 20 displayed products by using `sampleProducts` as a fallback during loading/unavailable backend states.
+- If backend returns fewer than 20 products (including empty/invalid results), merge in items from `frontend/src/data/sampleProducts.ts` to fill to 20 while avoiding duplicate IDs and preserving existing image URL normalization for backend items.
 
-**User-visible outcome:** The chatbot more consistently answers the specific question asked (or asks a quick clarifying question when needed), uses a friendlier conversational tone, and shows quick replies that match the user’s topic; the Chat page better explains how to get the best answers and when to use Contact.
+**User-visible outcome:** Visitors to "Our Collection" see a full 20-item product grid reliably—using backend products when available, or the 20 fallback products (or a filled-to-20 merge) when backend data is unavailable or incomplete.

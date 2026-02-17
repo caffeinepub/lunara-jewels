@@ -1,46 +1,35 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-17T15:58:46.361Z",
+  "generatedAt": "2026-02-17T16:57:17.724Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 3,
+    "total": 2,
+    "implemented": 2,
     "items": [
       {
-        "id": "REQ-25",
-        "summary": "Update the rule-based chatbot response selection (frontend/src/utils/chatbot.ts) so it answers the user’s specific question more directly by choosing the best-matching intent using a deterministic scoring approach (e.g., prefer longer/more-specific keyword/phrase matches, handle multiple matches, and avoid over-triggering broad intents like “shop” when a more specific intent matches).",
+        "id": "REQ-35",
+        "summary": "Ensure the customer-facing Shop collection page (\"Our Collection\" in frontend/src/pages/ShopPage.tsx) displays all 20 products by default whenever the catalog contains 20 items (from backend listProducts or from the frontend fallback sampleProducts).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/utils/chatbot.ts"
+          "frontend/src/pages/ShopPage.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/utils/chatbot.ts"
+          "frontend/src/pages/ShopPage.tsx"
         ]
       },
       {
-        "id": "REQ-26",
-        "summary": "Rewrite and/or refactor chatbot responses in frontend/src/utils/chatbot.ts to be more conversational while staying accurate to the site’s capabilities: responses should acknowledge the user’s question topic, give a direct answer first, then (optionally) ask a short follow-up question and provide 2–4 relevant quick replies that guide next steps.",
+        "id": "REQ-36",
+        "summary": "Update the product-list fetching logic in frontend/src/hooks/useProducts.ts so that it never results in fewer than 20 displayed products due solely to actor initialization/query enablement; if the backend returns fewer than 20 products (or returns an empty array unexpectedly), merge/fallback to the 20-item sampleProducts list so the Shop collection view still shows all 20 items.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/utils/chatbot.ts"
+          "frontend/src/hooks/useProducts.ts"
         ],
         "matchedFiles": [
-          "frontend/src/utils/chatbot.ts"
-        ]
-      },
-      {
-        "id": "REQ-27",
-        "summary": "Adjust the Chat page copy (frontend/src/pages/ChatPage.tsx) to set clearer expectations in a friendly, conversational tone that the assistant answers questions best when asked specifically, and that it may ask a quick follow-up when details are missing (with an option to go to Contact for anything outside coverage).",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/ChatPage.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/ChatPage.tsx"
+          "frontend/src/hooks/useProducts.ts"
         ]
       }
     ]
@@ -50,8 +39,8 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/pages/ChatPage.tsx",
-    "frontend/src/utils/chatbot.ts",
+    "frontend/src/hooks/useProducts.ts",
+    "frontend/src/pages/ShopPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

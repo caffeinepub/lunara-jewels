@@ -9,6 +9,8 @@ import Iter "mo:core/Iter";
 import MixinAuthorization "authorization/MixinAuthorization";
 import AccessControl "authorization/access-control";
 
+// No data migration needed. This is static data only.
+
 actor {
   let accessControlState = AccessControl.initState();
   include MixinAuthorization(accessControlState);
@@ -42,6 +44,7 @@ actor {
 
   let userProfiles = Map.empty<Principal, UserProfile>();
 
+  // BEGIN GENERATED PRODUCTS
   let products = Map.fromIter<Nat, Product>(
     ([
       {
@@ -49,24 +52,144 @@ actor {
         name = "Oxidized Silver Ring";
         description = "Beautiful handcrafted ring.";
         price = 5000;
-        imageUrl = "/images/ring.jpg";
+        imageUrl = "/assets/generated/ring-image1.jpg";
       },
       {
         id = 2;
         name = "Silver Pendant";
         description = "Elegant silver pendant with oxidized finish.";
         price = 7500;
-        imageUrl = "/images/pendant.jpg";
+        imageUrl = "/assets/generated/pendant1.jpg";
       },
       {
         id = 3;
         name = "Bracelet";
         description = "Stylish oxidized silver bracelet.";
+        price = 12000;
+        imageUrl = "/assets/generated/bracelet1.jpg";
+      },
+      {
+        id = 4;
+        name = "Silver Earrings";
+        description = "Delicate oxidized silver earrings.";
+        price = 9500;
+        imageUrl = "/assets/generated/silver-earrings1.jpg";
+      },
+      {
+        id = 5;
+        name = "Silver Necklace";
+        description = "Oxidized silver necklace with intricate design.";
+        price = 15000;
+        imageUrl = "/assets/generated/necklace1.jpg";
+      },
+      {
+        id = 6;
+        name = "Silver Brooch";
+        description = "Unique oxidized silver brooch.";
+        price = 10500;
+        imageUrl = "/assets/generated/brooch1.jpg";
+      },
+      {
+        id = 7;
+        name = "Silver Keychain";
+        description = "Handmade oxidized silver keychain.";
+        price = 6000;
+        imageUrl = "/assets/generated/keychain1.jpg";
+      },
+      {
+        id = 8;
+        name = "Silver Cufflinks";
+        description = "High-quality oxidized silver cufflinks.";
+        price = 14500;
+        imageUrl = "/assets/generated/cufflinks1.jpg";
+      },
+      {
+        id = 9;
+        name = "Silver Anklet";
+        description = "Stylish oxidized silver anklet.";
+        price = 8000;
+        imageUrl = "/assets/generated/anklet1.jpg";
+      },
+      {
+        id = 10;
+        name = "Silver Hairpin";
+        description = "Elegant oxidized silver hairpin.";
+        price = 9200;
+        imageUrl = "/assets/generated/hairpin1.jpg";
+      },
+      {
+        id = 11;
+        name = "Silver Tiara";
+        description = "Beautiful oxidized silver tiara with gemstones.";
+        price = 25000;
+        imageUrl = "/assets/generated/tiara1.jpg";
+      },
+      {
+        id = 12;
+        name = "Silver Belt Buckle";
+        description = "Handcrafted oxidized silver belt buckle.";
+        price = 11000;
+        imageUrl = "/assets/generated/belt-buckle1.jpg";
+      },
+      {
+        id = 13;
+        name = "Silver Charm Bracelet";
+        description = "Customizable oxidized silver charm bracelet.";
+        price = 13800;
+        imageUrl = "/assets/generated/charm-bracelet1.jpg";
+      },
+      {
+        id = 14;
+        name = "Silver Tie Clip";
+        description = "Fashionable oxidized silver tie clip.";
         price = 10000;
-        imageUrl = "/images/bracelet.jpg";
+        imageUrl = "/assets/generated/tie-clip1.jpg";
+      },
+      {
+        id = 15;
+        name = "Silver Nose Ring";
+        description = "Trendy oxidized silver nose ring.";
+        price = 3200;
+        imageUrl = "/assets/generated/nose-ring1.jpg";
+      },
+      {
+        id = 16;
+        name = "Men's Silver Ring";
+        description = "Bold and sturdy oxidized silver ring.";
+        price = 14000;
+        imageUrl = "/assets/generated/mens-ring1.jpg";
+      },
+      {
+        id = 17;
+        name = "Women's Silver Brooch";
+        description = "Chic women's oxidized silver brooch.";
+        price = 7800;
+        imageUrl = "/assets/generated/women-brooch1.jpg";
+      },
+      {
+        id = 18;
+        name = "Kid's Silver Pendant";
+        description = "Cute oxidized silver pendant for kids.";
+        price = 4100;
+        imageUrl = "/assets/generated/kid-pendant1.jpg";
+      },
+      {
+        id = 19;
+        name = "Ring with Stones";
+        description = "Ring with embedded stones.";
+        price = 17450;
+        imageUrl = "/assets/generated/ring-stones1.jpg";
+      },
+      {
+        id = 20;
+        name = "Unique Art-Silver Piece";
+        description = "Unique-to-store art-silver piece!";
+        price = 33000;
+        imageUrl = "/assets/generated/unique_art_piece1.jpg";
       },
     ] : [Product]).values().map(func(p) { (p.id, p) })
   );
+  // END GENERATED PRODUCTS
 
   let orderRequests = Map.empty<Nat, OrderRequest>();
   var nextOrderId : Nat = 1;

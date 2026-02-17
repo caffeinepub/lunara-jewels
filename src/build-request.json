@@ -1,86 +1,57 @@
 {
   "kind": "build_request",
-  "title": "Make chatbot more conversational and answer the specific question asked",
+  "title": "Show all 20 products in the Shop collection grid",
   "projectName": "Lunara Jewels",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-25",
-      "text": "Update the rule-based chatbot response selection (frontend/src/utils/chatbot.ts) so it answers the user’s specific question more directly by choosing the best-matching intent using a deterministic scoring approach (e.g., prefer longer/more-specific keyword/phrase matches, handle multiple matches, and avoid over-triggering broad intents like “shop” when a more specific intent matches).",
+      "id": "REQ-35",
+      "text": "Ensure the customer-facing Shop collection page (\"Our Collection\" in frontend/src/pages/ShopPage.tsx) displays all 20 products by default whenever the catalog contains 20 items (from backend listProducts or from the frontend fallback sampleProducts).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-5"
         ],
         "quotes": [
-          "please make the chatbot  answer the specific question asked and be more conversational"
+          "i want you to display all 20 products in the collection"
         ]
       },
       "acceptanceCriteria": [
-        "When a user message matches both a broad intent (e.g., “shop”) and a more specific intent (e.g., “rings”, “shipping”, “returns”, “payment”), the chatbot selects the more specific intent.",
-        "The intent matching tolerates punctuation and extra whitespace without changing the selected intent.",
-        "If no intent meets a reasonable confidence threshold, the chatbot asks 1–2 clarifying questions instead of giving a generic unrelated answer."
+        "When the backend returns 20 products from listProducts(), the Shop page renders 20 product cards (no pagination, slicing, or hidden items).",
+        "When the backend is unavailable or the actor is not ready, the Shop page renders the 20 fallback products from frontend/src/data/sampleProducts.ts.",
+        "The Shop page does not render an empty grid due to a disabled query/actor-loading state; it shows either loading skeletons or the 20 fallback products until backend data is available."
       ]
     },
     {
-      "id": "REQ-26",
-      "text": "Rewrite and/or refactor chatbot responses in frontend/src/utils/chatbot.ts to be more conversational while staying accurate to the site’s capabilities: responses should acknowledge the user’s question topic, give a direct answer first, then (optionally) ask a short follow-up question and provide 2–4 relevant quick replies that guide next steps.",
+      "id": "REQ-36",
+      "text": "Update the product-list fetching logic in frontend/src/hooks/useProducts.ts so that it never results in fewer than 20 displayed products due solely to actor initialization/query enablement; if the backend returns fewer than 20 products (or returns an empty array unexpectedly), merge/fallback to the 20-item sampleProducts list so the Shop collection view still shows all 20 items.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-5"
         ],
         "quotes": [
-          "please make the chatbot  answer the specific question asked and be more conversational"
+          "i want you to display all 20 products in the collection"
         ]
       },
       "acceptanceCriteria": [
-        "For matched intents, the first sentence of the bot response directly answers the user’s question (no generic preamble).",
-        "Responses include conversational elements (brief acknowledgement + optional follow-up question) without adding unsupported claims (e.g., no online checkout, no customer accounts, no guaranteed payment methods, no physical store unless explicitly stated elsewhere).",
-        "Quick replies shown after each bot answer are relevant to the detected topic (e.g., shipping answers include links like “Shipping details”/navigate-shipping, returns answers include navigate-returns, payment answers include navigate-payment, ordering answers include navigate-order)."
-      ]
-    },
-    {
-      "id": "REQ-27",
-      "text": "Adjust the Chat page copy (frontend/src/pages/ChatPage.tsx) to set clearer expectations in a friendly, conversational tone that the assistant answers questions best when asked specifically, and that it may ask a quick follow-up when details are missing (with an option to go to Contact for anything outside coverage).",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "please make the chatbot  answer the specific question asked and be more conversational"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The helper text on /chat encourages users to ask a specific question and mentions the bot may ask a short clarifying question when needed.",
-        "The helper text includes an explicit escalation path to the Contact page for complex/out-of-scope questions.",
-        "All user-facing text is in English and remains consistent with the inquiry-based ordering model (no suggestion of instant online checkout)."
+        "If actor.listProducts() throws, returns null/undefined, or returns an empty array, use the 20-item sampleProducts list.",
+        "If actor.listProducts() returns between 1 and 19 products, the Shop page still renders 20 product cards by filling missing items from sampleProducts (without duplicate IDs in the rendered list).",
+        "Image URL normalization (productImageMap/normalizeProductImage) still applies to backend-returned items after this change."
       ]
     }
   ],
   "constraints": [
-    "Keep the chatbot fully local and rule-based (no external AI/chat service integrations).",
-    "Do not edit files under frontend/src/components/ui or any other immutable frontend paths listed in SYSTEM_CONTEXT.",
-    "Do not introduce user accounts or online checkout flows in chatbot copy or behavior."
+    "Do not edit files under frontend/src/components/ui (read-only components); compose them as-is.",
+    "Keep the existing lightweight inquiry-based ordering model unchanged (no online checkout or accounts)."
   ],
   "nonGoals": [
-    "Adding real-time chat with humans or any external messaging integration.",
-    "Adding new backend APIs or storing chat transcripts on the backend.",
-    "Expanding the product catalog or adding new site pages/routes beyond chatbot behavior and /chat copy adjustments."
+    "Do not add new products beyond the existing 20-item catalog.",
+    "Do not change product pricing, names, or descriptions as part of this request unless required to fix missing/duplicate IDs that prevent rendering all 20 items.",
+    "Do not add new pages or navigation changes."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

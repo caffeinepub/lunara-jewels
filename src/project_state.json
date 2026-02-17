@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 15,
+  "projectStateVersion": 23,
   "summary": "Expand the Lunara Jewels marketing/e-commerce site scope to integrate additional trust- and conversion-focused sections/pages (collections/categories, pricing & offers, customization, certifications/quality info, shipping, returns, payment info, reviews, FAQ, blog, order tracking, and privacy/terms) while keeping the existing lightweight inquiry-based ordering model (no customer accounts and no external payments).",
   "architectural_notes": [
     "Chatbot must be implemented as an internal, rule-based FAQ-style assistant (no external AI/chat services integration).",
@@ -11,7 +11,8 @@
     "User request to make the chatbot answer \"any questions\" may conflict with the constraint that it must remain an internal, rule-based assistant (no external AI).",
     "Some requested chatbot FAQs assume capabilities/products that may not exist for Lunara Jewels (gold/diamond/hallmarking, online payments/UPI/COD/EMI, accounts/password resets, GST/making charges, physical store/appointments, same-day delivery). Bot responses must be constrained/clarified to avoid misinformation.",
     "Adding generic e-commerce pages (certifications, payment methods, order tracking/accounts) risks implying unsupported capabilities; content and UI must be carefully constrained to Lunara Jewels’ actual inquiry-based process and available assurances.",
-    "Chatbot may not be answering the user’s specific question directly enough and may feel insufficiently conversational; refine response selection/tone while staying rule-based."
+    "Chatbot may not be answering the user’s specific question directly enough and may feel insufficiently conversational; refine response selection/tone while staying rule-based.",
+    "Shop/collection view is not currently displaying all 20 products; user requests all 20 be shown."
   ],
   "isFixRequest": true,
   "existing_features": [
@@ -222,6 +223,70 @@
         "REQ-27"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-customer-facing-contact-information-across-the-frontend-to-use-location-bangalore-phone-number-7719333171-and-email-address-jewelerslunara312-gmail-com-wherever-the-site-displays-or-references-lunara-jewels-contact-details-including-the-contact-page-contact-info-card",
+      "title": "Update the customer-facing contact information across the frontend to use location \"Bangalore\", phone number \"7719333171\", and email address \"jewelerslunara312@gmail.com\" wherever the site displays or references Lunara Jewels contact details (including the Contact page contact info card).",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-distinct-product-images-one-per-product-for-the-current-sample-catalog-items-so-that-each-product-shows-its-own-specific-picture-instead-of-sharing-a-generic-placeholder-image",
+      "title": "Generate distinct product images (one per product) for the current sample catalog items so that each product shows its own specific picture instead of sharing a generic/placeholder image.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-sample-product-catalog-frontend-src-data-sampleproducts-ts-so-each-product-s-imageurl-points-to-its-corresponding-generated-product-image",
+      "title": "Update the sample product catalog (frontend/src/data/sampleProducts.ts) so each product’s imageUrl points to its corresponding generated product image.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-backend-seeded-product-catalog-backend-main-mo-so-the-default-products-include-correct-imageurl-values-that-point-to-the-generated-static-assets-under-assets-generated-and-align-with-the-product-specific-imagery-used-on-the-frontend",
+      "title": "Update the backend seeded product catalog (backend/main.mo) so the default products include correct imageUrl values that point to the generated static assets (under /assets/generated/...) and align with the product-specific imagery used on the frontend.",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-frontend-fallback-catalog-and-image-normalization-mappings-so-that-when-the-backend-is-unavailable-or-returns-legacy-image-urls-the-shop-still-shows-at-least-20-products-with-correct-per-product-images",
+      "title": "Update the frontend fallback catalog and image normalization mappings so that when the backend is unavailable (or returns legacy image URLs), the Shop still shows at least 20 products with correct per-product images.",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-product-images-for-each-newly-added-product-so-every-product-in-the-expanded-20-catalog-has-its-own-distinct-square-product-photo-asset",
+      "title": "Add generated static product images for each newly added product so every product in the expanded >=20 catalog has its own distinct square product photo asset.",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-customer-facing-shop-collection-page-our-collection-in-frontend-src-pages-shoppage-tsx-displays-all-20-products-by-default-whenever-the-catalog-contains-20-items-from-backend-listproducts-or-from-the-frontend-fallback-sampleproducts",
+      "title": "Ensure the customer-facing Shop collection page (\"Our Collection\" in frontend/src/pages/ShopPage.tsx) displays all 20 products by default whenever the catalog contains 20 items (from backend listProducts or from the frontend fallback sampleProducts).",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-product-list-fetching-logic-in-frontend-src-hooks-useproducts-ts-so-that-it-never-results-in-fewer-than-20-displayed-products-due-solely-to-actor-initialization-query-enablement-if-the-backend-returns-fewer-than-20-products-or-returns-an-empty-array-unexpectedly-merge-fallback-to-the-20-item-sampleproducts-list-so-the-shop-collection-view-still-shows-all-20-items",
+      "title": "Update the product-list fetching logic in frontend/src/hooks/useProducts.ts so that it never results in fewer than 20 displayed products due solely to actor initialization/query enablement; if the backend returns fewer than 20 products (or returns an empty array unexpectedly), merge/fallback to the 20-item sampleProducts list so the Shop collection view still shows all 20 items.",
+      "reqIds": [
+        "REQ-36"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -261,6 +326,32 @@
       "id": "AR-10",
       "summary": "Improve the rule-based chatbot so it answers the user’s specific question more directly and uses a more conversational tone (while remaining fully local/no external AI).",
       "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Update site contact information: set location to Bangalore, update contact phone number to 7719333171, and update email to jewelerslunara312@gmail.com.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Add and correctly map product-specific images so each product displays its corresponding pictures (instead of generic/placeholder imagery).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Expand the product catalog to include at least 20 products (seed additional oxidized silver jewelry items so the Shop has >=20 listings).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Expand the default seeded product catalog so the Shop displays at least 20 distinct oxidized silver jewelry products by default, with unique IDs, names, descriptions, prices, and valid imageUrl values under /assets/generated/.",
+      "reqIds": [
+        "REQ-32"
+      ],
       "status": "pending"
     }
   ],

@@ -2,10 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-the-rule-based-chatbot-response-selection-frontend-src-utils-chatbot-ts-so-it-answers-the-user-s-specific-question-more-directly-by-choosing-the-best-matching-intent-using-a-deterministic-scoring-approach-e-g-prefer-longer-more-specific-keyword-phrase-matches-handle-multiple-matches-and-avoid-over-triggering-broad-intents-like-shop-when-a-more-specific-intent-matches",
-      "featureTitle": "Update the rule-based chatbot response selection (frontend/src/utils/chatbot.ts) so it answers the user’s specific question more directly by choosing the best-matching intent using a deterministic scoring approach (e.g., prefer longer/more-specific keyword/phrase matches, handle multiple matches, and avoid over-triggering broad intents like “shop” when a more specific intent matches).",
+      "featureId": "feature-ensure-the-customer-facing-shop-collection-page-our-collection-in-frontend-src-pages-shoppage-tsx-displays-all-20-products-by-default-whenever-the-catalog-contains-20-items-from-backend-listproducts-or-from-the-frontend-fallback-sampleproducts",
+      "featureTitle": "Ensure the customer-facing Shop collection page (\"Our Collection\" in frontend/src/pages/ShopPage.tsx) displays all 20 products by default whenever the catalog contains 20 items (from backend listProducts or from the frontend fallback sampleProducts).",
       "files": [
-        "frontend/src/utils/chatbot.ts"
+        "frontend/src/pages/ShopPage.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -16,15 +16,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-25"
+        "REQ-35"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-rewrite-and-or-refactor-chatbot-responses-in-frontend-src-utils-chatbot-ts-to-be-more-conversational-while-staying-accurate-to-the-site-s-capabilities-responses-should-acknowledge-the-user-s-question-topic-give-a-direct-answer-first-then-optionally-ask-a-short-follow-up-question-and-provide-2-4-relevant-quick-replies-that-guide-next-steps",
-      "featureTitle": "Rewrite and/or refactor chatbot responses in frontend/src/utils/chatbot.ts to be more conversational while staying accurate to the site’s capabilities: responses should acknowledge the user’s question topic, give a direct answer first, then (optionally) ask a short follow-up question and provide 2–4 relevant quick replies that guide next steps.",
+      "featureId": "feature-update-the-product-list-fetching-logic-in-frontend-src-hooks-useproducts-ts-so-that-it-never-results-in-fewer-than-20-displayed-products-due-solely-to-actor-initialization-query-enablement-if-the-backend-returns-fewer-than-20-products-or-returns-an-empty-array-unexpectedly-merge-fallback-to-the-20-item-sampleproducts-list-so-the-shop-collection-view-still-shows-all-20-items",
+      "featureTitle": "Update the product-list fetching logic in frontend/src/hooks/useProducts.ts so that it never results in fewer than 20 displayed products due solely to actor initialization/query enablement; if the backend returns fewer than 20 products (or returns an empty array unexpectedly), merge/fallback to the 20-item sampleProducts list so the Shop collection view still shows all 20 items.",
       "files": [
-        "frontend/src/utils/chatbot.ts"
+        "frontend/src/hooks/useProducts.ts"
       ],
       "components": [
         "authorization@4.0.0",
@@ -35,26 +35,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-26"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-adjust-the-chat-page-copy-frontend-src-pages-chatpage-tsx-to-set-clearer-expectations-in-a-friendly-conversational-tone-that-the-assistant-answers-questions-best-when-asked-specifically-and-that-it-may-ask-a-quick-follow-up-when-details-are-missing-with-an-option-to-go-to-contact-for-anything-outside-coverage",
-      "featureTitle": "Adjust the Chat page copy (frontend/src/pages/ChatPage.tsx) to set clearer expectations in a friendly, conversational tone that the assistant answers questions best when asked specifically, and that it may ask a quick follow-up when details are missing (with an option to go to Contact for anything outside coverage).",
-      "files": [
-        "frontend/src/pages/ChatPage.tsx"
-      ],
-      "components": [
-        "authorization@4.0.0",
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-27"
+        "REQ-36"
       ],
       "confidence": "high"
     }
