@@ -1,0 +1,45 @@
+{
+  "kind": "build_request",
+  "title": "Add product search bar to the Shop page",
+  "projectName": "Lunara Jewels",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-43",
+      "text": "Add a search bar to the Shop page (frontend/src/pages/ShopPage.tsx) that allows customers to filter the displayed product catalog in real time by product name or description. The search input should be prominently placed above the product grid, styled consistently with the Lunara Jewels visual theme (warm tones, no blue/purple). Filtering must be purely client-side against the already-loaded product list so that no backend changes are required. When no products match the search query, display a friendly empty-state message (e.g., 'No products found for your search. Try a different keyword or browse our full collection.'). Clearing the search input must restore the full product grid.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "can you even add a search bar in the website"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A visible search input field appears above the product grid on the Shop page.",
+        "Typing in the search bar filters the product grid in real time to show only products whose name or description contains the search term (case-insensitive).",
+        "All 20 products are shown when the search input is empty or cleared.",
+        "When no products match, a friendly empty-state message is shown instead of an empty grid.",
+        "The search bar is styled with the existing Lunara Jewels warm-tone theme and does not use blue or purple as primary colors.",
+        "The search bar is responsive and does not break the layout on mobile viewports.",
+        "No backend changes are required; filtering operates entirely on the client-side product list."
+      ]
+    }
+  ],
+  "constraints": [
+    "Search filtering must be client-side only — do not add new backend query methods.",
+    "Do not modify any files listed in frontend.immutablePaths.",
+    "Maintain the existing Lunara Jewels visual theme (warm tones, no blue/purple as primary colors)."
+  ],
+  "nonGoals": [
+    "Full-text search across pages other than the Shop (e.g., blog posts, FAQ).",
+    "Server-side or backend-powered search.",
+    "Search result ranking or relevance scoring.",
+    "Search history or autocomplete/suggestions."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

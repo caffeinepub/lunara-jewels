@@ -1,0 +1,27 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Add product search bar to the Shop page",
+  "requirements": [
+    {
+      "id": "REQ-43",
+      "summary": "Add a client-side search bar to the Shop page that filters the displayed product catalog in real time by product name or description, styled with the Lunara Jewels warm-tone theme.",
+      "acceptanceCriteria": [
+        "A visible search input field appears above the product grid on the Shop page.",
+        "Typing in the search bar filters the product grid in real time to show only products whose name or description contains the search term (case-insensitive).",
+        "All 20 products are shown when the search input is empty or cleared.",
+        "When no products match, a friendly empty-state message is shown instead of an empty grid.",
+        "The search bar is styled with the existing Lunara Jewels warm-tone theme and does not use blue or purple as primary colors.",
+        "The search bar is responsive and does not break the layout on mobile viewports.",
+        "No backend changes are required; filtering operates entirely on the client-side product list."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/ShopPage.tsx",
+          "operation": "modify",
+          "description": "Add a controlled search input field above the product grid. Introduce local state to track the search query. Filter the products array returned by useProducts in real time using a case-insensitive substring match against product name and description. When the filtered array is empty, display a friendly empty-state message (e.g., 'No products found for your search. Try a different keyword or browse our full collection.'). Style the search input consistently with the Lunara Jewels warm-tone theme (no blue/purple primary colors). Ensure the search input and empty-state message are responsive on mobile viewports."
+        }
+      ]
+    }
+  ]
+}
