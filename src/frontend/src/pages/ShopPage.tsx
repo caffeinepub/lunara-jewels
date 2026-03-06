@@ -8,13 +8,17 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "@tanstack/react-router";
 import { Search, ShoppingCart, X } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { sampleProducts } from "../data/sampleProducts";
 import { useProducts } from "../hooks/useProducts";
 import { useCartStore } from "../state/cart";
+
+// Gender category mapping — Women: 1-8, 14-16 | Men: 9-13, 17-20
+const WOMEN_IDS = new Set([1, 2, 3, 4, 5, 6, 7, 8, 14, 15, 16]);
+const MEN_IDS = new Set([9, 10, 11, 12, 13, 17, 18, 19, 20]);
 
 type GenderTab = "all" | "women" | "men";
 
@@ -39,32 +43,21 @@ export default function ShopPage() {
 
   const allProducts = products || [];
 
-  // Merge gender info from sampleProducts
-  const productsWithGender = allProducts.map((p) => {
-    const sample = sampleProducts.find((s) => s.id === p.id);
-    return { ...p, gender: sample?.gender ?? "unisex" };
-  });
-
-  const tabFiltered =
+  // Apply gender filter first, then search filter
+  const genderFiltered =
     activeTab === "all"
-      ? productsWithGender
-      : productsWithGender.filter(
-          (p) => p.gender === activeTab || p.gender === "unisex",
-        );
+      ? allProducts
+      : activeTab === "women"
+        ? allProducts.filter((p) => WOMEN_IDS.has(Number(p.id)))
+        : allProducts.filter((p) => MEN_IDS.has(Number(p.id)));
 
   const filteredProducts = searchQuery.trim()
-    ? tabFiltered.filter(
+    ? genderFiltered.filter(
         (p) =>
           p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
           p.description.toLowerCase().includes(searchQuery.toLowerCase()),
       )
-    : tabFiltered;
-
-  const tabs: { key: GenderTab; label: string }[] = [
-    { key: "all", label: "All" },
-    { key: "women", label: "Women" },
-    { key: "men", label: "Men" },
-  ];
+    : genderFiltered;
 
   return (
     <div className="container py-12">
@@ -79,24 +72,35 @@ export default function ShopPage() {
       </div>
 
       {/* Gender Tabs */}
-      <div className="flex gap-2 mb-8" data-ocid="shop.gender.tab">
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            type="button"
-            onClick={() => setActiveTab(tab.key)}
-            data-ocid={`shop.${tab.key}.tab`}
-            className={[
-              "px-6 py-2 rounded-full text-sm font-medium border transition-colors duration-200",
-              activeTab === tab.key
-                ? "bg-foreground text-background border-foreground"
-                : "bg-transparent text-foreground border-border hover:border-foreground",
-            ].join(" ")}
+      <Tabs
+        value={activeTab}
+        onValueChange={(v) => setActiveTab(v as GenderTab)}
+        className="mb-8"
+      >
+        <TabsList className="h-11 px-1 gap-1 bg-muted/60 rounded-full w-auto inline-flex">
+          <TabsTrigger
+            value="all"
+            data-ocid="shop.all.tab"
+            className="rounded-full px-6 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm transition-all"
           >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+            All
+          </TabsTrigger>
+          <TabsTrigger
+            value="women"
+            data-ocid="shop.women.tab"
+            className="rounded-full px-6 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm transition-all"
+          >
+            Women
+          </TabsTrigger>
+          <TabsTrigger
+            value="men"
+            data-ocid="shop.men.tab"
+            className="rounded-full px-6 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm transition-all"
+          >
+            Men
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
 
       {/* Search Bar */}
       <div className="relative max-w-md mb-10">
@@ -153,6 +157,9 @@ export default function ShopPage() {
                 <span className="font-medium text-foreground">
                   "{searchQuery}"
                 </span>
+                {activeTab !== "all" && (
+                  <> in the {activeTab === "women" ? "Women" : "Men"} section</>
+                )}
                 . Try a different keyword or{" "}
                 <button
                   type="button"
@@ -177,6 +184,15 @@ export default function ShopPage() {
               <span className="font-medium text-foreground">
                 "{searchQuery}"
               </span>
+              {activeTab !== "all" && (
+                <>
+                  {" "}
+                  in{" "}
+                  <span className="font-medium text-foreground">
+                    {activeTab === "women" ? "Women" : "Men"}
+                  </span>
+                </>
+              )}
             </p>
           )}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -1,175 +1,241 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { Link } from "@tanstack/react-router";
-import { CheckCircle, CreditCard, MessageCircle, Shield } from "lucide-react";
+import {
+  CheckCircle,
+  Copy,
+  QrCode,
+  Shield,
+  Smartphone,
+  Zap,
+} from "lucide-react";
+import { toast } from "sonner";
+
+const UPI_ID = "jewelerslunara312@gmail.com";
 
 export default function PaymentMethodsPage() {
+  const handleCopyUPI = async () => {
+    try {
+      await navigator.clipboard.writeText(UPI_ID);
+      toast.success("UPI ID copied to clipboard!");
+    } catch {
+      toast.error("Failed to copy. Please copy manually.");
+    }
+  };
+
   return (
     <div className="container max-w-4xl py-12 md:py-16">
       <div className="mb-12 text-center">
-        <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">
+        <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
           Payment Methods
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Secure, flexible payment options arranged to suit your preferences.
+          Pay instantly and securely via UPI — the easiest way to complete your
+          Lunara Jewels purchase.
         </p>
       </div>
 
-      <Alert className="mb-8">
-        <CheckCircle className="h-4 w-4" />
-        <AlertTitle>How Payment Works</AlertTitle>
+      <Alert className="mb-8 border-primary/20 bg-primary/5">
+        <Smartphone className="h-4 w-4 text-primary" />
+        <AlertTitle className="text-primary">UPI Payment Available</AlertTitle>
         <AlertDescription>
-          We work with each customer individually to arrange payment after your
-          order request is reviewed and confirmed. Payment is not collected
-          through this website.
+          Pay directly via UPI during checkout. Scan the QR code or use our UPI
+          ID with any UPI app — PhonePe, Google Pay, Paytm, BHIM, and more.
         </AlertDescription>
       </Alert>
 
       <div className="space-y-6 mb-12">
-        <Card>
+        {/* Primary UPI Card */}
+        <Card className="border-primary/20 shadow-elegant">
           <CardHeader>
             <div className="flex items-center gap-3 mb-2">
-              <MessageCircle className="h-6 w-6 text-primary" />
-              <CardTitle className="font-serif text-2xl">
-                Our Inquiry-Based Process
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10">
+                <QrCode className="h-5 w-5 text-primary" />
+              </div>
+              <CardTitle className="font-display text-2xl">
+                Pay via UPI
               </CardTitle>
             </div>
+            <p className="text-sm text-muted-foreground">
+              Scan the QR code with any UPI app (PhonePe, Google Pay, Paytm,
+              BHIM, etc.)
+            </p>
           </CardHeader>
-          <CardContent className="space-y-4 text-muted-foreground">
-            <p>
-              Lunara Jewels uses an inquiry-based ordering system to provide
-              personalized service and flexible payment options:
-            </p>
-            <ol className="list-decimal list-inside space-y-3 ml-4">
-              <li>
-                <strong className="text-foreground">
-                  Submit an order request
-                </strong>{" "}
-                through our website with the items you're interested in
-              </li>
-              <li>
-                <strong className="text-foreground">
-                  Our team reviews your request
-                </strong>{" "}
-                and contacts you to confirm details (items, quantities, shipping
-                address)
-              </li>
-              <li>
-                <strong className="text-foreground">
-                  We discuss payment options
-                </strong>{" "}
-                that work for you, including method and timing
-              </li>
-              <li>
-                <strong className="text-foreground">Payment is arranged</strong>{" "}
-                through secure methods outside this website
-              </li>
-              <li>
-                <strong className="text-foreground">
-                  Your order is crafted and shipped
-                </strong>{" "}
-                once payment is confirmed
-              </li>
-            </ol>
-            <p className="mt-4">
-              This approach allows us to offer flexible payment arrangements and
-              personalized service for each customer.
-            </p>
+          <CardContent className="space-y-6">
+            {/* QR Code */}
+            <div className="flex flex-col items-center gap-4">
+              <div className="rounded-2xl overflow-hidden border border-border bg-white p-3 shadow-sm">
+                <img
+                  src="/assets/generated/upi-qr-code-transparent.dim_400x450.png"
+                  alt="UPI QR Code — jewelerslunara312@gmail.com"
+                  className="w-[200px] h-auto"
+                />
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Point your phone camera at the QR code to pay
+              </p>
+            </div>
+
+            <Separator />
+
+            {/* UPI ID */}
+            <div className="space-y-2">
+              <p className="text-sm font-medium">UPI ID</p>
+              <div className="flex items-center gap-2 bg-muted rounded-lg px-4 py-3 border border-border">
+                <span className="flex-1 font-mono text-sm font-semibold tracking-wide text-foreground select-all">
+                  {UPI_ID}
+                </span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleCopyUPI}
+                  className="shrink-0 gap-1.5 text-primary hover:text-primary"
+                  data-ocid="payment_methods.upi_copy_button"
+                >
+                  <Copy className="h-4 w-4" />
+                  Copy
+                </Button>
+              </div>
+            </div>
+
+            {/* Steps */}
+            <div className="bg-muted/50 rounded-xl p-4 space-y-3">
+              <p className="text-sm font-medium">How to pay:</p>
+              <ol className="space-y-2 text-sm text-muted-foreground">
+                <li className="flex gap-2">
+                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center font-bold">
+                    1
+                  </span>
+                  Open PhonePe, Google Pay, Paytm, or any UPI app on your phone
+                </li>
+                <li className="flex gap-2">
+                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center font-bold">
+                    2
+                  </span>
+                  Scan the QR code above, or search UPI ID manually
+                </li>
+                <li className="flex gap-2">
+                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center font-bold">
+                    3
+                  </span>
+                  Enter the exact amount and complete the payment
+                </li>
+                <li className="flex gap-2">
+                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center font-bold">
+                    4
+                  </span>
+                  Copy the UTR / transaction ID shown after payment
+                </li>
+                <li className="flex gap-2">
+                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center font-bold">
+                    5
+                  </span>
+                  Paste it in the checkout form to confirm your order
+                </li>
+              </ol>
+            </div>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <div className="flex items-center gap-3 mb-2">
-              <CreditCard className="h-6 w-6 text-primary" />
-              <CardTitle className="font-serif text-2xl">
-                Available Payment Options
-              </CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4 text-muted-foreground">
-            <p>
-              We work with each customer to arrange payment methods that suit
-              your preferences. Common options include:
-            </p>
-            <ul className="list-disc list-inside space-y-2 ml-4">
-              <li>Bank transfers (NEFT/RTGS/IMPS)</li>
-              <li>UPI payments</li>
-              <li>Cash on delivery (where available)</li>
-              <li>Installment plans (for larger orders)</li>
-              <li>Other secure payment methods by arrangement</li>
-            </ul>
-            <p className="mt-4">
-              When we contact you to confirm your order, we'll discuss which
-              payment methods are available for your location and order, and
-              arrange what works best for you.
-            </p>
-          </CardContent>
-        </Card>
-
+        {/* Security Card */}
         <Card>
           <CardHeader>
             <div className="flex items-center gap-3 mb-2">
               <Shield className="h-6 w-6 text-primary" />
-              <CardTitle className="font-serif text-2xl">
+              <CardTitle className="font-display text-2xl">
                 Payment Security
               </CardTitle>
             </div>
           </CardHeader>
           <CardContent className="space-y-4 text-muted-foreground">
             <p>
-              Your security is important to us. We work with trusted payment
-              systems and never collect sensitive payment information through
-              this website.
+              UPI payments are processed through India's secure National
+              Payments Corporation of India (NPCI) infrastructure. Your
+              transaction is protected end-to-end.
             </p>
-            <p>When payment is arranged:</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
-              <li>We use secure, established payment channels</li>
-              <li>Payment details are handled through trusted platforms</li>
-              <li>
-                We never ask for card details via email or unsecured channels
-              </li>
-              <li>You'll receive clear confirmation of payment receipt</li>
+              <li>All transactions are encrypted and bank-verified</li>
+              <li>We never ask for your UPI PIN or card details</li>
+              <li>You receive an instant bank confirmation SMS</li>
+              <li>Your UTR number serves as proof of payment</li>
             </ul>
             <p className="mt-4">
-              If you have any concerns about payment security, please don't
-              hesitate to contact us. We're happy to answer questions and ensure
-              you feel comfortable with the process.
+              If you have any concerns, please contact us before making a
+              payment. We're happy to answer questions and ensure you feel
+              comfortable.
             </p>
           </CardContent>
         </Card>
 
+        {/* Flexible Plans Card */}
         <Card>
           <CardHeader>
             <div className="flex items-center gap-3 mb-2">
-              <CheckCircle className="h-6 w-6 text-primary" />
-              <CardTitle className="font-serif text-2xl">
+              <Zap className="h-6 w-6 text-primary" />
+              <CardTitle className="font-display text-2xl">
                 Flexible Payment Plans
               </CardTitle>
             </div>
           </CardHeader>
           <CardContent className="space-y-4 text-muted-foreground">
             <p>
-              For larger orders or special circumstances, we're happy to discuss
-              flexible payment arrangements including:
+              For larger orders or special requirements, we offer flexible
+              payment arrangements in addition to UPI:
             </p>
             <ul className="list-disc list-inside space-y-2 ml-4">
-              <li>Installment plans (EMI options)</li>
+              <li>Installment plans (EMI options via UPI or bank transfer)</li>
               <li>Partial payment upfront with balance on delivery</li>
-              <li>Custom payment schedules for bulk orders</li>
+              <li>Bank transfers (NEFT/RTGS/IMPS) for bulk orders</li>
+              <li>Custom payment schedules — contact us to discuss</li>
             </ul>
             <p className="mt-4">
-              Please mention your payment preferences when submitting your order
-              request or contact us directly to discuss options.
+              Payment for all standard orders is now done via UPI directly
+              during checkout — fast, simple, and instant.
             </p>
+          </CardContent>
+        </Card>
+
+        {/* Confirmation Card */}
+        <Card className="border-accent/20 bg-accent/5">
+          <CardHeader>
+            <div className="flex items-center gap-3 mb-2">
+              <CheckCircle className="h-6 w-6 text-primary" />
+              <CardTitle className="font-display text-2xl">
+                Order Confirmation
+              </CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4 text-muted-foreground">
+            <p>After your UPI payment is complete:</p>
+            <ol className="list-decimal list-inside space-y-3 ml-4">
+              <li>
+                <strong className="text-foreground">
+                  Enter your UTR number
+                </strong>{" "}
+                in the checkout form to confirm your payment
+              </li>
+              <li>
+                <strong className="text-foreground">
+                  Receive your order confirmation
+                </strong>{" "}
+                with both order reference and payment reference
+              </li>
+              <li>
+                <strong className="text-foreground">
+                  Your jewelry is crafted and shipped
+                </strong>{" "}
+                within 3–5 business days
+              </li>
+            </ol>
           </CardContent>
         </Card>
       </div>
 
       <div className="flex flex-wrap gap-3 justify-center">
         <Button asChild size="lg">
-          <Link to="/order-request">Submit Order Request</Link>
+          <Link to="/order-request">Start Order & Pay via UPI</Link>
         </Button>
         <Button variant="outline" size="lg" asChild>
           <Link to="/contact">Contact Us</Link>

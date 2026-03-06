@@ -41,6 +41,8 @@ export default function OrderRequestPage() {
       return;
     }
 
+    const total = getTotalPrice();
+
     submitOrder(
       {
         customerName: formData.name,
@@ -50,7 +52,7 @@ export default function OrderRequestPage() {
           productId: BigInt(item.productId),
           quantity: BigInt(item.quantity),
         })),
-        totalAmount: BigInt(getTotalPrice()),
+        totalAmount: BigInt(total),
       },
       {
         onSuccess: (orderId) => {
@@ -74,25 +76,25 @@ export default function OrderRequestPage() {
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-accent/20 mb-4">
             <CheckCircle2 className="h-10 w-10 text-accent-foreground" />
           </div>
-          <h1 className="font-display text-4xl font-bold">
-            Order Request Received!
-          </h1>
+          <h1 className="font-display text-4xl font-bold">Order Submitted!</h1>
           <p className="text-lg text-muted-foreground">
-            Thank you for your interest in our jewelry. We've received your
-            order request.
+            Thank you! Your order request has been received. We will contact you
+            shortly to confirm your order and arrange payment.
           </p>
+
           <Card className="border-accent/20 bg-accent/5">
             <CardContent className="pt-6">
               <p className="text-sm text-muted-foreground mb-2">
-                Your Order Reference
+                Order Reference
               </p>
-              <p className="text-2xl font-bold font-mono">#{orderReference}</p>
+              <p className="text-xl font-bold font-mono">#{orderReference}</p>
             </CardContent>
           </Card>
-          <p className="text-muted-foreground">
-            We'll contact you at <strong>{formData.email}</strong> within 24-48
-            hours to confirm your order and arrange payment.
+
+          <p className="text-muted-foreground text-sm">
+            A confirmation will be sent to <strong>{formData.email}</strong>.
           </p>
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <Button size="lg" onClick={() => navigate({ to: "/shop" })}>
               Continue Shopping
@@ -137,6 +139,7 @@ export default function OrderRequestPage() {
                       setFormData({ ...formData, name: e.target.value })
                     }
                     required
+                    data-ocid="order.name_input"
                   />
                 </div>
 
@@ -151,6 +154,7 @@ export default function OrderRequestPage() {
                       setFormData({ ...formData, email: e.target.value })
                     }
                     required
+                    data-ocid="order.email_input"
                   />
                 </div>
 
@@ -164,11 +168,8 @@ export default function OrderRequestPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, shippingNote: e.target.value })
                     }
+                    data-ocid="order.shipping_textarea"
                   />
-                  <p className="text-sm text-muted-foreground">
-                    We'll contact you to confirm shipping details and arrange
-                    payment.
-                  </p>
                 </div>
 
                 <Button
@@ -176,6 +177,7 @@ export default function OrderRequestPage() {
                   size="lg"
                   className="w-full"
                   disabled={isPending}
+                  data-ocid="order.submit_button"
                 >
                   {isPending ? "Submitting..." : "Submit Order Request"}
                 </Button>
@@ -211,12 +213,6 @@ export default function OrderRequestPage() {
                 <div className="flex justify-between text-lg font-semibold">
                   <span>Total</span>
                   <span>₹{getTotalPrice().toLocaleString()}</span>
-                </div>
-                <div className="bg-accent/10 rounded-lg p-4 text-sm text-muted-foreground">
-                  <p>
-                    This is an order inquiry. We'll contact you to confirm
-                    details and arrange payment.
-                  </p>
                 </div>
               </CardContent>
             </Card>
