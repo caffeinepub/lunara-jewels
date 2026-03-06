@@ -1,7 +1,7 @@
-import React from 'react';
-import { useAdminStatus } from '../../hooks/useAdminStatus';
-import UnauthorizedState from './UnauthorizedState';
-import { Loader2 } from 'lucide-react';
+import { Loader2 } from "lucide-react";
+import type React from "react";
+import { useAdminStatus } from "../../hooks/useAdminStatus";
+import UnauthorizedState from "./UnauthorizedState";
 
 interface AdminGateProps {
   children: React.ReactNode;

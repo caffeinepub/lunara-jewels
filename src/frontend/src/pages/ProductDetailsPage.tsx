@@ -1,16 +1,16 @@
-import { useParams, useNavigate } from '@tanstack/react-router';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { useProduct } from '../hooks/useProducts';
-import { Skeleton } from '@/components/ui/skeleton';
-import { ShoppingCart, ArrowLeft } from 'lucide-react';
-import { useCartStore } from '../state/cart';
-import { toast } from 'sonner';
-import { useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useNavigate, useParams } from "@tanstack/react-router";
+import { ArrowLeft, ShoppingCart } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
+import { useProduct } from "../hooks/useProducts";
+import { useCartStore } from "../state/cart";
 
 export default function ProductDetailsPage() {
-  const { productId } = useParams({ from: '/product/$productId' });
+  const { productId } = useParams({ from: "/product/$productId" });
   const navigate = useNavigate();
   const { data: product, isLoading } = useProduct(Number(productId));
   const addItem = useCartStore((state) => state.addItem);
@@ -18,7 +18,7 @@ export default function ProductDetailsPage() {
 
   const handleAddToCart = () => {
     if (!product) return;
-    
+
     addItem({
       productId: Number(product.id),
       name: product.name,
@@ -26,8 +26,8 @@ export default function ProductDetailsPage() {
       quantity,
       imageUrl: product.imageUrl,
     });
-    
-    toast.success('Added to cart', {
+
+    toast.success("Added to cart", {
       description: `${quantity} × ${product.name} added to your cart.`,
     });
   };
@@ -52,7 +52,7 @@ export default function ProductDetailsPage() {
     return (
       <div className="container py-12 text-center">
         <p className="text-lg text-muted-foreground mb-4">Product not found</p>
-        <Button onClick={() => navigate({ to: '/shop' })}>
+        <Button onClick={() => navigate({ to: "/shop" })}>
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Shop
         </Button>
@@ -64,7 +64,7 @@ export default function ProductDetailsPage() {
     <div className="container py-12">
       <Button
         variant="ghost"
-        onClick={() => navigate({ to: '/shop' })}
+        onClick={() => navigate({ to: "/shop" })}
         className="mb-8"
       >
         <ArrowLeft className="mr-2 h-4 w-4" />
@@ -87,14 +87,20 @@ export default function ProductDetailsPage() {
             <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
               {product.name}
             </h1>
-            <p className="text-3xl font-semibold">₹{Number(product.price).toLocaleString()}</p>
+            <p className="text-3xl font-semibold">
+              ₹{Number(product.price).toLocaleString()}
+            </p>
           </div>
 
           <Separator />
 
           <div>
-            <h2 className="font-serif text-xl font-semibold mb-3">Description</h2>
-            <p className="text-muted-foreground leading-relaxed">{product.description}</p>
+            <h2 className="font-serif text-xl font-semibold mb-3">
+              Description
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">
+              {product.description}
+            </p>
           </div>
 
           <Card className="border-accent/20 bg-accent/5">
@@ -111,7 +117,9 @@ export default function ProductDetailsPage() {
 
           <div className="space-y-4">
             <div className="flex items-center gap-4">
-              <label htmlFor="quantity" className="font-medium">Quantity:</label>
+              <label htmlFor="quantity" className="font-medium">
+                Quantity:
+              </label>
               <div className="flex items-center border rounded-md">
                 <Button
                   variant="ghost"
@@ -126,7 +134,11 @@ export default function ProductDetailsPage() {
                   type="number"
                   min="1"
                   value={quantity}
-                  onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+                  onChange={(e) =>
+                    setQuantity(
+                      Math.max(1, Number.parseInt(e.target.value) || 1),
+                    )
+                  }
                   className="w-16 text-center border-x bg-transparent py-2 focus:outline-none"
                 />
                 <Button
@@ -140,7 +152,11 @@ export default function ProductDetailsPage() {
               </div>
             </div>
 
-            <Button size="lg" className="w-full gap-2" onClick={handleAddToCart}>
+            <Button
+              size="lg"
+              className="w-full gap-2"
+              onClick={handleAddToCart}
+            >
               <ShoppingCart className="h-5 w-5" />
               Add to Cart
             </Button>
@@ -150,4 +166,3 @@ export default function ProductDetailsPage() {
     </div>
   );
 }
-

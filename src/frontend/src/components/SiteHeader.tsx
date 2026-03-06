@@ -1,16 +1,21 @@
-import { Link, useNavigate } from '@tanstack/react-router';
-import { ShoppingCart, Menu, X, ChevronDown } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger,
   DropdownMenuSeparator,
-} from '@/components/ui/dropdown-menu';
-import { useCartStore } from '../state/cart';
-import { useState } from 'react';
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { ChevronDown, Menu, ShoppingCart, X } from "lucide-react";
+import { useState } from "react";
+import { useCartStore } from "../state/cart";
 
 export default function SiteHeader() {
   const navigate = useNavigate();
@@ -18,27 +23,27 @@ export default function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const mainNavLinks = [
-    { to: '/', label: 'Home' },
-    { to: '/shop', label: 'Shop' },
-    { to: '/about', label: 'About' },
-    { to: '/contact', label: 'Contact' },
-    { to: '/chat', label: 'Chat' },
+    { to: "/", label: "Home" },
+    { to: "/shop", label: "Shop" },
+    { to: "/about", label: "About" },
+    { to: "/contact", label: "Contact" },
+    { to: "/chat", label: "Chat" },
   ];
 
   const helpLinks = [
-    { to: '/faq', label: 'FAQ' },
-    { to: '/shipping', label: 'Shipping & Delivery' },
-    { to: '/returns', label: 'Returns & Exchange' },
-    { to: '/payment-methods', label: 'Payment Methods' },
-    { to: '/order-tracking', label: 'Track Order' },
+    { to: "/faq", label: "FAQ" },
+    { to: "/shipping", label: "Shipping & Delivery" },
+    { to: "/returns", label: "Returns & Exchange" },
+    { to: "/payment-methods", label: "Payment Methods" },
+    { to: "/order-tracking", label: "Track Order" },
   ];
 
   const learnLinks = [
-    { to: '/collections', label: 'Our Collections' },
-    { to: '/customization', label: 'Customization' },
-    { to: '/certifications-quality', label: 'Quality & Craftsmanship' },
-    { to: '/blog', label: 'Jewelry Journal' },
-    { to: '/reviews', label: 'Customer Reviews' },
+    { to: "/collections", label: "Our Collections" },
+    { to: "/customization", label: "Customization" },
+    { to: "/certifications-quality", label: "Quality & Craftsmanship" },
+    { to: "/blog", label: "Jewelry Journal" },
+    { to: "/reviews", label: "Customer Reviews" },
   ];
 
   return (
@@ -47,9 +52,9 @@ export default function SiteHeader() {
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <img
-            src="/assets/generated/lunara-jewels-logo.dim_1200x300.png"
+            src="/assets/WhatsApp Image 2026-02-18 at 9.05.52 AM.jpeg"
             alt="Lunara Jewels"
-            className="h-8 w-auto md:h-10"
+            className="h-14 w-auto md:h-16 object-contain"
           />
         </Link>
 
@@ -60,8 +65,8 @@ export default function SiteHeader() {
               key={link.to}
               to={link.to}
               className="text-sm font-medium transition-colors hover:text-accent-foreground"
-              activeProps={{ className: 'text-foreground' }}
-              inactiveProps={{ className: 'text-muted-foreground' }}
+              activeProps={{ className: "text-foreground" }}
+              inactiveProps={{ className: "text-muted-foreground" }}
             >
               {link.label}
             </Link>
@@ -70,7 +75,11 @@ export default function SiteHeader() {
           {/* Help Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="text-sm font-medium text-muted-foreground hover:text-accent-foreground">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-sm font-medium text-muted-foreground hover:text-accent-foreground"
+              >
                 Help <ChevronDown className="ml-1 h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -88,7 +97,11 @@ export default function SiteHeader() {
           {/* Learn Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="text-sm font-medium text-muted-foreground hover:text-accent-foreground">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-sm font-medium text-muted-foreground hover:text-accent-foreground"
+              >
                 Learn <ChevronDown className="ml-1 h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -110,7 +123,7 @@ export default function SiteHeader() {
             variant="ghost"
             size="icon"
             className="relative"
-            onClick={() => navigate({ to: '/cart' })}
+            onClick={() => navigate({ to: "/cart" })}
           >
             <ShoppingCart className="h-5 w-5" />
             {cartItemCount > 0 && (
@@ -142,7 +155,9 @@ export default function SiteHeader() {
                 ))}
 
                 <div className="border-t border-border/40 pt-4">
-                  <p className="text-sm font-semibold text-muted-foreground mb-3">Help & Support</p>
+                  <p className="text-sm font-semibold text-muted-foreground mb-3">
+                    Help & Support
+                  </p>
                   {helpLinks.map((link) => (
                     <SheetClose asChild key={link.to}>
                       <Link
@@ -157,7 +172,9 @@ export default function SiteHeader() {
                 </div>
 
                 <div className="border-t border-border/40 pt-4">
-                  <p className="text-sm font-semibold text-muted-foreground mb-3">Learn More</p>
+                  <p className="text-sm font-semibold text-muted-foreground mb-3">
+                    Learn More
+                  </p>
                   {learnLinks.map((link) => (
                     <SheetClose asChild key={link.to}>
                       <Link

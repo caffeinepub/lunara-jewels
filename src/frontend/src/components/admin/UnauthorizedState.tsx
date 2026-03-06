@@ -1,14 +1,16 @@
-import React from 'react';
-import { ShieldAlert } from 'lucide-react';
-import { Button } from '../ui/button';
-import { useNavigate } from '@tanstack/react-router';
-import LoginButton from '../auth/LoginButton';
+import { useNavigate } from "@tanstack/react-router";
+import { ShieldAlert } from "lucide-react";
+import React from "react";
+import LoginButton from "../auth/LoginButton";
+import { Button } from "../ui/button";
 
 interface UnauthorizedStateProps {
   isAuthenticated: boolean;
 }
 
-export default function UnauthorizedState({ isAuthenticated }: UnauthorizedStateProps) {
+export default function UnauthorizedState({
+  isAuthenticated,
+}: UnauthorizedStateProps) {
   const navigate = useNavigate();
 
   return (
@@ -19,19 +21,19 @@ export default function UnauthorizedState({ isAuthenticated }: UnauthorizedState
             <ShieldAlert className="h-12 w-12 text-destructive" />
           </div>
         </div>
-        
+
         <div className="space-y-2">
           <h1 className="text-2xl font-serif font-bold">Access Denied</h1>
           <p className="text-muted-foreground">
             {isAuthenticated
-              ? 'You do not have administrator privileges to access this area.'
-              : 'Please log in with an administrator account to access this area.'}
+              ? "You do not have administrator privileges to access this area."
+              : "Please log in with an administrator account to access this area."}
           </p>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           {!isAuthenticated && <LoginButton />}
-          <Button variant="outline" onClick={() => navigate({ to: '/' })}>
+          <Button variant="outline" onClick={() => navigate({ to: "/" })}>
             Return to Home
           </Button>
         </div>

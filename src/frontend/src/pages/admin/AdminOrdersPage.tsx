@@ -1,11 +1,17 @@
-import React from 'react';
-import AdminGate from '../../components/admin/AdminGate';
-import { useListOrderRequests } from '../../hooks/useAdminOrders';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
-import { Badge } from '../../components/ui/badge';
-import { Loader2, Package, Mail, User, FileText, Calendar } from 'lucide-react';
-import { Link } from '@tanstack/react-router';
-import { Button } from '../../components/ui/button';
+import { Link } from "@tanstack/react-router";
+import { Calendar, FileText, Loader2, Mail, Package, User } from "lucide-react";
+import React from "react";
+import AdminGate from "../../components/admin/AdminGate";
+import { Badge } from "../../components/ui/badge";
+import { Button } from "../../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../../components/ui/card";
+import { useListOrderRequests } from "../../hooks/useAdminOrders";
 
 export default function AdminOrdersPage() {
   return (
@@ -35,7 +41,9 @@ function OrdersContent() {
     return (
       <div className="container py-12">
         <div className="text-center space-y-4">
-          <p className="text-destructive">Failed to load orders. Please try again.</p>
+          <p className="text-destructive">
+            Failed to load orders. Please try again.
+          </p>
         </div>
       </div>
     );
@@ -46,7 +54,9 @@ function OrdersContent() {
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-4xl font-serif font-bold mb-2">Order Requests</h1>
+            <h1 className="text-4xl font-serif font-bold mb-2">
+              Order Requests
+            </h1>
             <p className="text-muted-foreground">
               View and manage customer order requests.
             </p>
@@ -73,7 +83,9 @@ function OrdersContent() {
                       <CardTitle className="font-serif flex items-center gap-2">
                         Order #{order.id.toString()}
                         <Badge variant="outline">
-                          {new Date(Number(order.timestamp) / 1000000).toLocaleDateString()}
+                          {new Date(
+                            Number(order.timestamp) / 1000000,
+                          ).toLocaleDateString()}
                         </Badge>
                       </CardTitle>
                       <CardDescription className="mt-1">
@@ -99,7 +111,9 @@ function OrdersContent() {
                         <Calendar className="h-4 w-4 text-muted-foreground" />
                         <span className="font-medium">Date:</span>
                         <span>
-                          {new Date(Number(order.timestamp) / 1000000).toLocaleString()}
+                          {new Date(
+                            Number(order.timestamp) / 1000000,
+                          ).toLocaleString()}
                         </span>
                       </div>
                     </div>
@@ -109,7 +123,9 @@ function OrdersContent() {
                           <FileText className="h-4 w-4 text-muted-foreground mt-0.5" />
                           <div>
                             <span className="font-medium">Shipping Note:</span>
-                            <p className="text-muted-foreground mt-1">{order.shippingNote}</p>
+                            <p className="text-muted-foreground mt-1">
+                              {order.shippingNote}
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -121,11 +137,14 @@ function OrdersContent() {
                     <div className="space-y-2">
                       {order.items.map((item, idx) => (
                         <div
+                          // biome-ignore lint/suspicious/noArrayIndexKey: order items have no stable frontend id
                           key={idx}
                           className="flex items-center justify-between text-sm bg-muted/30 rounded-lg p-3"
                         >
                           <div>
-                            <span className="font-medium">Product ID: {item.productId.toString()}</span>
+                            <span className="font-medium">
+                              Product ID: {item.productId.toString()}
+                            </span>
                           </div>
                           <div className="text-muted-foreground">
                             Quantity: {item.quantity.toString()}

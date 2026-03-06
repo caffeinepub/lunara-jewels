@@ -1,33 +1,39 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Mail, MapPin, Phone } from 'lucide-react';
-import { toast } from 'sonner';
-import { CONTACT_INFO } from '@/config/contact';
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { CONTACT_INFO } from "@/config/contact";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validation
     if (!formData.name || !formData.email || !formData.message) {
-      toast.error('Please fill in all fields');
+      toast.error("Please fill in all fields");
       return;
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      toast.error('Please enter a valid email address');
+      toast.error("Please enter a valid email address");
       return;
     }
 
@@ -37,7 +43,7 @@ export default function ContactPage() {
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
-      toast.success('Message sent successfully!', {
+      toast.success("Message sent successfully!", {
         description: "We'll get back to you as soon as possible.",
       });
     }, 1000);
@@ -52,9 +58,12 @@ export default function ContactPage() {
           </div>
           <h1 className="font-display text-4xl font-bold">Thank You!</h1>
           <p className="text-lg text-muted-foreground">
-            Your message has been received. We'll get back to you within 24-48 hours.
+            Your message has been received. We'll get back to you within 24-48
+            hours.
           </p>
-          <Button onClick={() => setIsSubmitted(false)}>Send Another Message</Button>
+          <Button onClick={() => setIsSubmitted(false)}>
+            Send Another Message
+          </Button>
         </div>
       </div>
     );
@@ -64,9 +73,12 @@ export default function ContactPage() {
     <div className="container py-12">
       <div className="max-w-5xl mx-auto">
         <div className="text-center space-y-4 mb-12">
-          <h1 className="font-display text-4xl md:text-5xl font-bold">Get in Touch</h1>
+          <h1 className="font-display text-4xl md:text-5xl font-bold">
+            Get in Touch
+          </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Have questions about our jewelry or need assistance? We'd love to hear from you.
+            Have questions about our jewelry or need assistance? We'd love to
+            hear from you.
           </p>
         </div>
 
@@ -81,7 +93,9 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Email</h3>
-                    <p className="text-sm text-muted-foreground">{CONTACT_INFO.email}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {CONTACT_INFO.email}
+                    </p>
                   </div>
                 </div>
 
@@ -91,7 +105,9 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Phone</h3>
-                    <p className="text-sm text-muted-foreground">{CONTACT_INFO.phoneFormatted}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {CONTACT_INFO.phoneFormatted}
+                    </p>
                   </div>
                 </div>
 
@@ -101,7 +117,9 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Location</h3>
-                    <p className="text-sm text-muted-foreground">{CONTACT_INFO.location}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {CONTACT_INFO.location}
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -122,7 +140,9 @@ export default function ContactPage() {
           {/* Contact Form */}
           <Card className="lg:col-span-2 border-none shadow-elegant">
             <CardHeader>
-              <CardTitle className="font-display text-2xl">Send us a Message</CardTitle>
+              <CardTitle className="font-display text-2xl">
+                Send us a Message
+              </CardTitle>
               <CardDescription>
                 Fill out the form below and we'll respond as soon as possible.
               </CardDescription>
@@ -135,7 +155,9 @@ export default function ContactPage() {
                     id="name"
                     placeholder="Your name"
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
                     required
                   />
                 </div>
@@ -147,7 +169,9 @@ export default function ContactPage() {
                     type="email"
                     placeholder="your.email@example.com"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
                     required
                   />
                 </div>
@@ -159,13 +183,20 @@ export default function ContactPage() {
                     placeholder="Tell us how we can help you..."
                     rows={6}
                     value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, message: e.target.value })
+                    }
                     required
                   />
                 </div>
 
-                <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </CardContent>

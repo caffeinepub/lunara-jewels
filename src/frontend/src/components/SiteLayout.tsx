@@ -1,6 +1,6 @@
-import { Outlet } from '@tanstack/react-router';
-import SiteHeader from './SiteHeader';
-import SiteFooter from './SiteFooter';
+import { Outlet } from "@tanstack/react-router";
+import SiteFooter from "./SiteFooter";
+import SiteHeader from "./SiteHeader";
 
 export default function SiteLayout() {
   return (
@@ -13,4 +13,3 @@ export default function SiteLayout() {
     </div>
   );
 }
-

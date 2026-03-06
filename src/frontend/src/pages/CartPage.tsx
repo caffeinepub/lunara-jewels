@@ -1,9 +1,15 @@
-import { useNavigate } from '@tanstack/react-router';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { useCartStore } from '../state/cart';
-import { Trash2, Plus, Minus, ShoppingBag } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { useNavigate } from "@tanstack/react-router";
+import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
+import { useCartStore } from "../state/cart";
 
 export default function CartPage() {
   const navigate = useNavigate();
@@ -16,11 +22,13 @@ export default function CartPage() {
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-muted mb-4">
             <ShoppingBag className="h-10 w-10 text-muted-foreground" />
           </div>
-          <h1 className="font-display text-4xl font-bold">Your Cart is Empty</h1>
+          <h1 className="font-display text-4xl font-bold">
+            Your Cart is Empty
+          </h1>
           <p className="text-lg text-muted-foreground">
             Discover our beautiful collection of oxidized silver jewelry.
           </p>
-          <Button size="lg" onClick={() => navigate({ to: '/shop' })}>
+          <Button size="lg" onClick={() => navigate({ to: "/shop" })}>
             Continue Shopping
           </Button>
         </div>
@@ -30,7 +38,9 @@ export default function CartPage() {
 
   return (
     <div className="container py-12">
-      <h1 className="font-display text-4xl md:text-5xl font-bold mb-8">Shopping Cart</h1>
+      <h1 className="font-display text-4xl md:text-5xl font-bold mb-8">
+        Shopping Cart
+      </h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Cart Items */}
@@ -50,8 +60,12 @@ export default function CartPage() {
                   <div className="flex-1 space-y-3">
                     <div className="flex justify-between items-start">
                       <div>
-                        <h3 className="font-serif text-lg font-semibold">{item.name}</h3>
-                        <p className="text-muted-foreground">₹{item.price.toLocaleString()}</p>
+                        <h3 className="font-serif text-lg font-semibold">
+                          {item.name}
+                        </h3>
+                        <p className="text-muted-foreground">
+                          ₹{item.price.toLocaleString()}
+                        </p>
                       </div>
                       <Button
                         variant="ghost"
@@ -68,16 +82,25 @@ export default function CartPage() {
                         variant="outline"
                         size="icon"
                         className="h-8 w-8"
-                        onClick={() => updateQuantity(item.productId, Math.max(1, item.quantity - 1))}
+                        onClick={() =>
+                          updateQuantity(
+                            item.productId,
+                            Math.max(1, item.quantity - 1),
+                          )
+                        }
                       >
                         <Minus className="h-3 w-3" />
                       </Button>
-                      <span className="w-12 text-center font-medium">{item.quantity}</span>
+                      <span className="w-12 text-center font-medium">
+                        {item.quantity}
+                      </span>
                       <Button
                         variant="outline"
                         size="icon"
                         className="h-8 w-8"
-                        onClick={() => updateQuantity(item.productId, item.quantity + 1)}
+                        onClick={() =>
+                          updateQuantity(item.productId, item.quantity + 1)
+                        }
                       >
                         <Plus className="h-3 w-3" />
                       </Button>
@@ -97,7 +120,9 @@ export default function CartPage() {
         <div>
           <Card className="sticky top-24 border-none shadow-elegant">
             <CardHeader>
-              <CardTitle className="font-display text-2xl">Order Summary</CardTitle>
+              <CardTitle className="font-display text-2xl">
+                Order Summary
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex justify-between text-muted-foreground">
@@ -114,7 +139,7 @@ export default function CartPage() {
               <Button
                 size="lg"
                 className="w-full"
-                onClick={() => navigate({ to: '/order-request' })}
+                onClick={() => navigate({ to: "/order-request" })}
               >
                 Proceed to Checkout
               </Button>
@@ -122,7 +147,7 @@ export default function CartPage() {
                 variant="outline"
                 size="lg"
                 className="w-full"
-                onClick={() => navigate({ to: '/shop' })}
+                onClick={() => navigate({ to: "/shop" })}
               >
                 Continue Shopping
               </Button>
@@ -133,4 +158,3 @@ export default function CartPage() {
     </div>
   );
 }
-

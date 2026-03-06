@@ -1,14 +1,10 @@
-import React, { useState } from 'react';
-import AdminGate from '../../components/admin/AdminGate';
-import ProductEditorDialog from '../../components/admin/ProductEditorDialog';
-import { useProducts } from '../../hooks/useProducts';
-import { useAddProduct, useUpdateProduct, useDeleteProduct } from '../../hooks/useAdminProducts';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
-import { Button } from '../../components/ui/button';
-import { Loader2, Plus, Pencil, Trash2, Package } from 'lucide-react';
-import { Link } from '@tanstack/react-router';
-import type { Product } from '../../backend';
-import { toast } from 'sonner';
+import { Link } from "@tanstack/react-router";
+import { Loader2, Package, Pencil, Plus, Trash2 } from "lucide-react";
+import React, { useState } from "react";
+import { toast } from "sonner";
+import type { Product } from "../../backend";
+import AdminGate from "../../components/admin/AdminGate";
+import ProductEditorDialog from "../../components/admin/ProductEditorDialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -18,7 +14,21 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '../../components/ui/alert-dialog';
+} from "../../components/ui/alert-dialog";
+import { Button } from "../../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../../components/ui/card";
+import {
+  useAddProduct,
+  useDeleteProduct,
+  useUpdateProduct,
+} from "../../hooks/useAdminProducts";
+import { useProducts } from "../../hooks/useProducts";
 
 export default function AdminProductsPage() {
   return (
@@ -35,19 +45,19 @@ function ProductsContent() {
   const deleteProduct = useDeleteProduct();
 
   const [editorOpen, setEditorOpen] = useState(false);
-  const [editorMode, setEditorMode] = useState<'create' | 'edit'>('create');
+  const [editorMode, setEditorMode] = useState<"create" | "edit">("create");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [productToDelete, setProductToDelete] = useState<Product | null>(null);
 
   const handleAddProduct = () => {
-    setEditorMode('create');
+    setEditorMode("create");
     setSelectedProduct(null);
     setEditorOpen(true);
   };
 
   const handleEditProduct = (product: Product) => {
-    setEditorMode('edit');
+    setEditorMode("edit");
     setSelectedProduct(product);
     setEditorOpen(true);
   };
@@ -62,25 +72,25 @@ function ProductsContent() {
 
     try {
       await deleteProduct.mutateAsync(productToDelete.id);
-      toast.success('Product deleted successfully');
+      toast.success("Product deleted successfully");
       setDeleteDialogOpen(false);
       setProductToDelete(null);
     } catch (error: any) {
-      toast.error(error?.message || 'Failed to delete product');
+      toast.error(error?.message || "Failed to delete product");
     }
   };
 
   const handleSaveProduct = async (product: Product) => {
     try {
-      if (editorMode === 'create') {
+      if (editorMode === "create") {
         await addProduct.mutateAsync(product);
-        toast.success('Product added successfully');
+        toast.success("Product added successfully");
       } else {
         await updateProduct.mutateAsync(product);
-        toast.success('Product updated successfully');
+        toast.success("Product updated successfully");
       }
     } catch (error: any) {
-      toast.error(error?.message || 'Failed to save product');
+      toast.error(error?.message || "Failed to save product");
       throw error;
     }
   };
@@ -103,7 +113,9 @@ function ProductsContent() {
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-4xl font-serif font-bold mb-2">Product Catalog</h1>
+            <h1 className="text-4xl font-serif font-bold mb-2">
+              Product Catalog
+            </h1>
             <p className="text-muted-foreground">
               Manage your product inventory and pricing.
             </p>
@@ -124,7 +136,9 @@ function ProductsContent() {
             <CardContent className="py-12 text-center space-y-4">
               <Package className="h-12 w-12 mx-auto text-muted-foreground" />
               <div>
-                <p className="text-muted-foreground mb-4">No products in your catalog yet.</p>
+                <p className="text-muted-foreground mb-4">
+                  No products in your catalog yet.
+                </p>
                 <Button onClick={handleAddProduct} className="gap-2">
                   <Plus className="h-4 w-4" />
                   Add Your First Product
@@ -198,7 +212,8 @@ function ProductsContent() {
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Product</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete "{productToDelete?.name}"? This action cannot be undone.
+              Are you sure you want to delete "{productToDelete?.name}"? This
+              action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -207,7 +222,9 @@ function ProductsContent() {
               onClick={handleDeleteConfirm}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              {deleteProduct.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {deleteProduct.isPending && (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              )}
               Delete
             </AlertDialogAction>
           </AlertDialogFooter>

@@ -1,6 +1,6 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useActor } from './useActor';
-import type { CartItem } from '../backend';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import type { CartItem } from "../backend";
+import { useActor } from "./useActor";
 
 interface OrderRequestInput {
   customerName: string;
@@ -16,21 +16,20 @@ export function useSubmitOrderRequest() {
 
   return useMutation({
     mutationFn: async (input: OrderRequestInput) => {
-      if (!actor) throw new Error('Actor not available');
-      
+      if (!actor) throw new Error("Actor not available");
+
       const orderId = await actor.submitOrderRequest(
         input.customerName,
         input.customerEmail,
         input.shippingNote,
         input.items,
-        input.totalAmount
+        input.totalAmount,
       );
-      
+
       return orderId;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['orderRequests'] });
+      queryClient.invalidateQueries({ queryKey: ["orderRequests"] });
     },
   });
 }
-
