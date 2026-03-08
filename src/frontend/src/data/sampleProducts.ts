@@ -2,31 +2,6 @@ import type { Product } from "../backend";
 
 export const sampleProducts: Product[] = [
   {
-    id: BigInt(1),
-    name: "Tribal Heritage Textured Cuff Bangles",
-    description:
-      "The Tribal Heritage Textured Cuff Bangles are inspired by traditional tribal jewelry aesthetics known for their bold textures and handcrafted appeal. Designed in a classic oxidised finish, these open cuff bangles feature geometric and engraved patterns that add depth and character to the design. Their minimal yet rustic look makes them versatile for everyday wear as well as ethnic styling. The adjustable open design ensures comfort and easy wear, while the antique finish enhances their vintage charm. Perfect for stacking or wearing individually, these bangles add a touch of heritage elegance to any outfit. Material: Oxidised metal alloy | Finish: Antique oxidised silver | Style: Tribal cuff bangles | Size: Adjustable open cuff | Quantity: Set of 3",
-    price: BigInt(2399),
-    imageUrl:
-      "/assets/uploads/WhatsApp-Image-2026-03-03-at-10.48.58-AM-2--1.jpeg",
-  },
-  {
-    id: BigInt(2),
-    name: "Vintage Pearl Blossom Chandbali Earrings",
-    description:
-      "Elegant and graceful, the Vintage Pearl Blossom Chandbali Earrings combine floral artistry with timeless charm. Designed with delicate embossed flower motifs in oxidised silver, the earrings create a beautiful half-moon chandbali silhouette. Clusters of lustrous pearl beads cascade from the base, adding a soft and feminine touch while creating gentle movement. The floral stud at the top adds a vintage aesthetic that complements the handcrafted design. Lightweight yet eye-catching, these earrings are ideal for festive gatherings, brunches, traditional outfits, and Indo-western styling. Material: Oxidised silver finish alloy | Embellishment: Pearl bead clusters | Design: Floral engraved chandbali | Finish: Vintage oxidised silver | Closure: Push back",
-    price: BigInt(2699),
-    imageUrl: "/assets/uploads/WhatsApp-Image-2026-03-03-at-12.02.06-PM-2.jpeg",
-  },
-  {
-    id: BigInt(3),
-    name: "Sapphire Veil Jhumkas",
-    description:
-      "Oxidized silver jhumkas with blue stone teardrop tops, intricate heart-shaped chandbali bodies, and a row of pearl ghungroos at the hem. These statement earrings blend heritage craftsmanship with contemporary elegance, making them ideal for festive occasions, weddings, and cultural celebrations. The deep blue stones add a regal contrast against the antique silver finish. Material: Premium oxidised metal alloy | Stones: Blue semi-precious style stones | Embellishment: Pearl ghungroo drops | Finish: Antique oxidised silver | Style: Statement jhumka | Closure: Push back",
-    price: BigInt(3499),
-    imageUrl: "/assets/uploads/WhatsApp-Image-2026-03-03-at-10.48.58-AM-3.jpeg",
-  },
-  {
     id: BigInt(4),
     name: "Moonveil Pearl Haar",
     description:
@@ -69,30 +44,12 @@ export const sampleProducts: Product[] = [
     imageUrl: "/assets/uploads/WhatsApp-Image-2026-03-03-at-12.03.39-PM-8.jpeg",
   },
   {
-    id: BigInt(9),
-    name: "Celestial Orbit Bracelet",
-    description:
-      "A timeless oxidized silver bracelet inspired by planetary orbits and celestial beauty. The interlocking link design symbolizes eternal connection, while the oxidation process gives each piece unique depth and character. The fine engraving along each link adds a subtle texture that catches the light beautifully. Material: Oxidised silver alloy | Finish: Antique oxidised | Style: Contemporary stackable bracelet | Closure: Toggle clasp | Occasion: Everyday wear and festive",
-    price: BigInt(2999),
-    imageUrl:
-      "/assets/generated/lunara-product-eternal-bracelet.dim_1024x1024.png",
-  },
-  {
     id: BigInt(10),
     name: "Stellar Dust Studs",
     description:
       "Delicate stud earrings featuring tiny star motifs in oxidized silver. The fine oxidized detailing makes each star shimmer with subtle sophistication, perfect for daily wear or gifting. These lightweight studs are crafted for comfort and elegance — a versatile addition to any jewelry collection. Material: Oxidised silver alloy | Style: Minimalist star studs | Finish: Antique oxidised | Closure: Butterfly push back | Occasion: Everyday and casual wear",
     price: BigInt(2200),
     imageUrl: "/assets/generated/lunara-product-starry-studs.dim_1024x1024.png",
-  },
-  {
-    id: BigInt(11),
-    name: "Dual Orbit Pendant Necklace",
-    description:
-      "A celestial-inspired necklace with two interlocking circular pendants representing planetary orbits. Handcrafted with intricate oxidized silver detailing, the pendant rests beautifully on a fine chain. The layered ring design symbolizes harmony and balance, making this piece both meaningful and elegant. Material: Oxidised silver alloy | Style: Geometric pendant necklace | Finish: Antique oxidised | Chain Length: Adjustable 16–18 inches | Occasion: Everyday and evening wear",
-    price: BigInt(3299),
-    imageUrl:
-      "/assets/generated/lunara-product-dual-orbit-necklace.dim_1024x1024.png",
   },
   {
     id: BigInt(12),
@@ -102,15 +59,6 @@ export const sampleProducts: Product[] = [
     price: BigInt(3599),
     imageUrl:
       "/assets/generated/lunara-product-midnight-choker.dim_1024x1024.png",
-  },
-  {
-    id: BigInt(13),
-    name: "Lunara Moon Charm Bracelet",
-    description:
-      "A delicate chain bracelet adorned with crescent moon charms that catch the light with every movement. The oxidized finish adds vintage warmth to this modern design, while the lightweight structure makes it comfortable for all-day wear. Stack it with other bracelets or wear it alone for a clean, elegant look. Material: Oxidised silver alloy | Embellishment: Crescent moon charms | Finish: Antique oxidised | Closure: Lobster clasp | Occasion: Everyday and festive",
-    price: BigInt(2499),
-    imageUrl:
-      "/assets/generated/lunara-product-mooncharm-chain.dim_1024x1024.png",
   },
   {
     id: BigInt(14),
@@ -145,31 +93,5 @@ export const sampleProducts: Product[] = [
     price: BigInt(3199),
     imageUrl:
       "/assets/generated/lunara-product-constellation-brooch.dim_1024x1024.png",
-  },
-  {
-    id: BigInt(18),
-    name: "Shadowplay Band Ring",
-    description:
-      "A sleek band ring with artfully etched shadow-play engravings that shift beautifully with the light. The oxidized silver finish creates contrast within the engraved grooves, giving depth to the minimal design. Perfect for everyday elegance with a touch of mystery and understated luxury. Material: Oxidised silver alloy | Style: Engraved band ring | Finish: Antique oxidised | Size: Adjustable | Occasion: Everyday and casual wear",
-    price: BigInt(2299),
-    imageUrl:
-      "/assets/generated/lunara-product-shadowband-ring.dim_1024x1024.png",
-  },
-  {
-    id: BigInt(19),
-    name: "Moon Phase Statement Ring",
-    description:
-      "A striking oxidized silver ring featuring continuous moon phase engravings around the band. Each lunar phase is carefully crafted to capture the cycle's mystical beauty — from new moon to full moon. A meaningful piece for those who feel connected to lunar energy and timeless design. Material: Oxidised silver alloy | Style: Moon phase engraved ring | Finish: Antique oxidised | Size: Adjustable | Occasion: Everyday, gifting, and festive",
-    price: BigInt(2799),
-    imageUrl: "/assets/generated/lunara-product-moonlit-ring.dim_1024x1024.png",
-  },
-  {
-    id: BigInt(20),
-    name: "Lunara Celestial Pendant",
-    description:
-      "An elegant pendant showcasing a star constellation design in oxidized silver. The deep dark patina creates rich depth and dimension, making each star appear to shine from within the metal. Suspended on a fine adjustable chain, this pendant is a refined everyday piece and a beautiful gift for the stargazer in your life. Material: Oxidised silver alloy | Style: Constellation pendant | Finish: Antique oxidised | Chain Length: Adjustable 16–18 inches | Occasion: Everyday, gifting, and festive",
-    price: BigInt(3499),
-    imageUrl:
-      "/assets/generated/lunara-product-celestial-pendant.dim_1024x1024.png",
   },
 ];

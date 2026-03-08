@@ -1,14 +1,20 @@
-# Specification
+# Lunara Jewels
 
-## Summary
-**Goal:** Add a real-time product search bar to the Shop page so customers can filter the product catalog by name or description.
+## Current State
+The shop page displays all products fetched from the backend. The backend has 20 hardcoded products in the `products` map. The frontend ShopPage shows products in a grid with Men/Women/All tabs and a search bar.
 
-**Planned changes:**
-- Add a styled search input field above the product grid on the Shop page (`ShopPage.tsx`)
-- Implement client-side filtering that matches products by name or description (case-insensitive) as the user types
-- Display a friendly empty-state message when no products match the search query
-- Clearing the input restores the full product grid
-- Style the search bar to match the Lunara Jewels warm-tone theme (no blue/purple)
-- Ensure the search bar is responsive on mobile viewports
+## Requested Changes (Diff)
 
-**User-visible outcome:** Customers visiting the Shop page can type into a search bar to instantly filter products by name or description, and see a helpful message if nothing matches their query.
+### Add
+- Nothing to add
+
+### Modify
+- Backend: Clear all products from the `products` map so it starts empty
+- Frontend: Update ShopPage to handle empty collection gracefully with a friendly empty-state message
+
+### Remove
+- All 20 hardcoded products from the backend products map
+
+## Implementation Plan
+1. Regenerate backend with an empty products map (no seed products)
+2. Update frontend ShopPage empty state to show a friendly "Collection coming soon" message instead of the search-related empty state when there are no products at all

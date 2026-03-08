@@ -10,15 +10,15 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "@tanstack/react-router";
-import { Search, ShoppingCart, X } from "lucide-react";
+import { Search, ShoppingCart, Sparkles, X } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useProducts } from "../hooks/useProducts";
 import { useCartStore } from "../state/cart";
 
-// Gender category mapping — Women: 1-8, 14-16 | Men: 9-13, 17-20
-const WOMEN_IDS = new Set([1, 2, 3, 4, 5, 6, 7, 8, 14, 15, 16]);
-const MEN_IDS = new Set([9, 10, 11, 12, 13, 17, 18, 19, 20]);
+// Gender category mapping — Women: 4-8, 14-16 | Men: 10, 12, 17
+const WOMEN_IDS = new Set([4, 5, 6, 7, 8, 14, 15, 16]);
+const MEN_IDS = new Set([10, 12, 17]);
 
 type GenderTab = "all" | "women" | "men";
 
@@ -141,7 +141,43 @@ export default function ShopPage() {
             </Card>
           ))}
         </div>
+      ) : allProducts.length === 0 ? (
+        /* Truly empty — no products at all */
+        <div
+          className="flex flex-col items-center justify-center py-32 text-center"
+          data-ocid="shop.empty_state"
+        >
+          {/* Decorative ring */}
+          <div className="relative mb-8">
+            <div className="w-24 h-24 rounded-full border border-primary/20 flex items-center justify-center">
+              <div className="w-16 h-16 rounded-full border border-primary/30 flex items-center justify-center">
+                <Sparkles className="h-6 w-6 text-primary/60" />
+              </div>
+            </div>
+            {/* Orbiting dot */}
+            <span className="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-primary/40" />
+            <span className="absolute bottom-2 left-0 w-1.5 h-1.5 rounded-full bg-accent/50" />
+          </div>
+
+          <h2 className="font-display text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-3">
+            Our collection is coming soon
+          </h2>
+          <p className="text-muted-foreground max-w-xs leading-relaxed text-base">
+            Each piece is being curated with care. Check back shortly to
+            discover our handcrafted oxidized silver jewelry.
+          </p>
+
+          {/* Divider ornament */}
+          <div className="flex items-center gap-3 mt-8 text-primary/30">
+            <span className="block h-px w-10 bg-primary/20" />
+            <span className="text-xs tracking-[0.3em] uppercase font-medium text-muted-foreground/60">
+              Lunara Jewels
+            </span>
+            <span className="block h-px w-10 bg-primary/20" />
+          </div>
+        </div>
       ) : filteredProducts.length === 0 ? (
+        /* Search / filter returned no results */
         <div
           className="flex flex-col items-center justify-center py-24 text-center gap-4"
           data-ocid="shop.empty_state"
@@ -171,7 +207,7 @@ export default function ShopPage() {
                 .
               </>
             ) : (
-              <>No products in this collection yet.</>
+              <>No products in this category yet.</>
             )}
           </p>
         </div>
